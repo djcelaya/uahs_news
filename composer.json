@@ -1,0 +1,8 @@
+{
+  "name": "az-digital/uahs_news",
+  "description": "Composer project template for custom Quickstart module.",
+  "type": "drupal-custom-module",
+  "require": {
+      "drupal/core": "^9"
+  }
+}
