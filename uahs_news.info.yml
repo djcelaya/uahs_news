@@ -1,5 +1,5 @@
-name: 'Quickstart module project template'
+name: 'UAHS News'
 type: module
-description: 'Composer project template for custom Quickstart module.'
+description: 'Customizations and overrides of AZ News for UAHS Communications.'
 core_version_requirement: ^9
-package: The University of Arizona - Custom
+package: 'UAHS Communications'
