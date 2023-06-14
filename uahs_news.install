@@ -7,5 +7,13 @@ use Drupal\field\Entity\FieldConfig;
  * in addition to the default image teaser.
  */
 function uahs_news_update_9201() {
-    return;
+    print('Did this even run?');
+    echo $message;
+    $message = 'Did this even run?';
+    error_log($message);
+    \Drupal::logger('uahs_news')->notice($message);
+    $config_factory = \Drupal::configFactory();
+    $config = $config_factory->getEditable('field.field.node.az_news.field_az_media_image');
+    $config->set('settings.handler_settings', ['az_image: az_image', 'az_remote_video: az_remote_video']);
+    $config->save(TRUE);
 }
