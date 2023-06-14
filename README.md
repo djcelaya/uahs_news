@@ -1,35 +1,5 @@
-# Quickstart module composer project template
+# UAHS News
 
-This repo provides a composer project template for creating a custom Drupal
-module designed to be used on Arizona Quickstart websites but that is not
-suitable for inclusion in Quickstart itself for one reason or another.
-
-## Create project from this template repository
-To create your own module project using this repository as a template use the
-following composer command:
-```
-composer create-project --no-install --ask az-digital/uahs_news:dev-main
-```
-
-After creating your project, you'll want to replace all instances of
-`uahs_news` and `uahs-news` with your own module name.
-
-## Lando configuration
-This project template includes a sample lando configuration file that can be
-used to automatically build a local Arizona Quickstart site with your module
-installed for development and testing.
-```
-lando start
-lando install
-```
-
-The sample lando configuration also includes tooling that expose Quickstart's
-code quality tools for checking that your module code adheres to Quickstart's
-coding standards.
-```
-lando phpcs
-
-lando phpcbf
-
-lando phpstan
-```
+This custom Drupal module provides overrides to the [AZ News content type](https://github.com/az-digital/az_quickstart/tree/main/modules/custom/az_news) and custom views of
+AZ News for UAHS Communications. It is designed to be used in the [Arizona Quickstart](https://github.com/az-digital/az_quickstart) ecosystem
+and used the [Quickstart module composer project template](https://github.com/az-digital/azqs_module_project).
