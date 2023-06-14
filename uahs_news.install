@@ -1,0 +1,11 @@
+<?php
+
+use Drupal\field\Entity\FieldConfig;
+
+/**
+ * Adjusts field_az_media_image in az_news so that it permits remote videos
+ * in addition to the default image teaser.
+ */
+function uahs_news_update_9201() {
+    return;
+}

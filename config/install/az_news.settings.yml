@@ -1,0 +1,5 @@
+settings:
+  handler_settings:
+    target_bundles:
+      az_image: az_image
+      az_remote_video: az_remote_video

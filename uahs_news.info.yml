@@ -3,3 +3,8 @@ type: module
 description: 'Customizations and overrides of AZ News for UAHS Communications.'
 core_version_requirement: ^9
 package: 'UAHS Communications'
+dependencies:
+  # config:
+  #   - field.field.node.az_person.field_az_media_image
+  # module:
+    - az_news
