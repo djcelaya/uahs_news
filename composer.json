@@ -4,10 +4,5 @@
   "type": "drupal-custom-module",
   "require": {
       "drupal/core": "^9"
-  },
-  "extra": {
-    "patches": {
-        "az-digital/az_quickstart": "patches/composer/uahs_news_patches.diff"
-    }
-}
+  }
 }
