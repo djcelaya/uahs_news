@@ -5,21 +5,32 @@
  * in addition to the default image teaser.
  */
 function uahs_news_install() {
-    print('Did this even run?');
-    echo $message;
-    $message = 'Did this even run?';
-    error_log($message);
-    \Drupal::logger('uahs_news')->notice($message);
+    // print('Did this even run?');
+    // echo $message;
+    // $message = 'Did this even run?';
+    // error_log($message);
+    // \Drupal::logger('uahs_news')->notice($message);
     $config_factory = \Drupal::configFactory();
     $config = $config_factory->getEditable('field.field.node.az_news.field_az_media_image');
-    $config_item = $config->get('settings.handler_settings');
-    print_r($config_item);
-    $config->set('settings.handler_settings.target_bundles', ['az_image' => 'az_image', 'az_remote_video' => 'az_remote_video']);
-    $config_item = $config->get('settings.handler_settings');
-    print_r($config_item);
+    // $config_item = $config->get('settings.handler_settings');
+    // print_r($config_item);
+    $config->set('settings.handler_settings.target_bundles', [
+        'az_image' => 'az_image',
+        'az_remote_video' => 'az_remote_video'
+    ]);
+    // $config_item = $config->get('settings.handler_settings');
+    // print_r($config_item);
     $config->save(TRUE);
 }
 
+/**
+ * Restores az_news.field_az_media_image to its default settings – only accepting a single image.
+ */
 function uahs_news_uninstall() {
-    print('This uninstalled but doesn\'t do anything');
+    $config_factory = \Drupal::configFactory();
+    $config = $config_factory->getEditable('field.field.node.az_news.field_az_media_image');
+    $config->set('settings.handler_settings.target_bundles', [
+        'az_image' => 'az_image'
+    ]);
+    $config->save(TRUE);
 }
