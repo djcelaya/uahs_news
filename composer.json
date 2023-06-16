@@ -1,7 +1,7 @@
 {
   "name": "djcelaya/uahs_news",
   "description": "Composer project template for custom Quickstart module.",
-  "type": "drupal-custom-module",
+  "type": "drupal-module",
   "require": {
       "drupal/core": "^9"
   }
