@@ -1,0 +1,8 @@
+id: uahs_campus_connect
+label: UAHS Campus Connect Migrations
+description: Migrations for moving news content from UAHS Campus Connect (D7) to Health Sciences (QS2).
+source_type: XML
+dependencies:
+  enforced:
+    module:
+      - uahs_campus_connect_migration
