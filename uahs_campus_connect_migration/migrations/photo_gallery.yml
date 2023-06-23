@@ -1,0 +1,32 @@
+id: uahs_photo_gallery
+label: Photos
+migration_group: uahs_campus_connect
+
+source:
+  plugin: photo_gallery
+  constants:
+    content_type_tag: 'Photo Gallery'
+
+destination:
+  plugin: entity:node
+
+process:
+  type:
+    plugin: default_value
+    default_value: az_news
+  title: title
+
+# migration_dependencies:
+#   required:
+#     - uahs_default_news_tags
+#     - uahs_portal_categories
+#     - uahs_affiliation
+#     - uahs_strategic_pillars
+#     - uahs_centers
+#     - uahs_downstream_news_releases
+#     - uahs_content_promotion
+
+dependencies:
+  enforced:
+    module:
+      - az_news
