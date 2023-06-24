@@ -5,9 +5,15 @@ migration_group: uahs_campus_connect
 source:
   plugin: embedded_data
   data_rows:
-    - name: Story
-    - name: Video
+    - name: The Healthy Dose Blog
+    - name: Honors & Awards
+    - name: In The Media
+    - name: News Release
     - name: Photo Gallery
+    - name: Story
+    - name: SVP Message
+    - name: Video
+
   ids:
     name:
       type: string
