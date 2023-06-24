@@ -1,0 +1,33 @@
+id: uahs_default_news_tags
+label: Default UAHS News Tags
+migration_group: uahs_campus_connect
+
+source:
+  plugin: embedded_data
+  data_rows:
+    - name: Story
+    - name: Video
+    - name: Photo Gallery
+  ids:
+    name:
+      type: string
+
+  fields:
+    -
+      name: name
+      selector: name
+
+process:
+  vid:
+    plugin: default_value
+    default_value: az_news_tags
+  name: name
+
+destination:
+  plugin: entity:taxonomy_term
+  default_bundle: az_news_tags
+
+dependencies:
+  enforced:
+    module:
+      - az_news
