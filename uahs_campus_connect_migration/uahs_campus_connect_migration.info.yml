@@ -1,5 +1,5 @@
 type: module
-name: 'UAHS Campus Connect Migration'
+name: 'UAHS Campus Connect'
 description: 'Migrates news content from UAHS Campus Connect (D7) to Health Sciences (QS2).'
 package: 'UAHS Communications'
 core_version_requirement: ^9
