@@ -24,6 +24,8 @@ class PhotoGallery extends SqlBase {
         $query->addField('fm2', 'uri', 'field_cover_image');
         $query->addField('fdfcic', 'field_cover_image_caption_value', 'field_cover_image_caption');
 
+        $query->addExpression('GROUP_CONCAT(DISTINCT ttd1.name)', 'field_promote_this_content_to');
+
         $query->addJoin('LEFT OUTER', 'field_data_field_card_headline', 'fdfch', 'fdfch.entity_id = n.nid');
         $query->addJoin('LEFT OUTER', 'field_data_field_card_image', 'fdfci', 'fdfci.entity_id = n.nid');
         $query->addJoin('LEFT OUTER', 'file_managed', 'fm1', 'fm1.fid = fdfci.field_card_image_fid');
@@ -33,6 +35,9 @@ class PhotoGallery extends SqlBase {
         $query->addJoin('LEFT OUTER', 'field_data_field_cover_image', 'fdfci2', 'fdfci2.entity_id = n.nid');
         $query->addJoin('LEFT OUTER', 'file_managed', 'fm2', 'fm2.fid = fdfci2.field_cover_image_fid');
         $query->addJoin('LEFT OUTER', 'field_data_field_cover_image_caption', 'fdfcic', 'fdfcic.entity_id = n.nid');
+
+        $query->addJoin('LEFT OUTER', 'field_data_field_promote_this_content_to', 'fdfptct', 'fdfptct.entity_id = n.nid');
+        $query->addJoin('LEFT OUTER', 'taxonomy_term_data', 'ttd1', 'ttd1.tid = fdfptct.field_promote_this_content_to_tid');
 
         $query->condition('n.type', 'photo_gallery', '=');
         $query->condition('n.status', '1', '=');
@@ -54,6 +59,7 @@ class PhotoGallery extends SqlBase {
             'body' => $this->t('Description'),
             'field_cover_image' => $this->t('Hero Image'),
             'field_cover_image_caption' => $this->t('Cover Image Caption'),
+            'field_promote_this_content_to' => $this->t('Promote this content to'),
         ];
     }
 
