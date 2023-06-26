@@ -16,15 +16,15 @@ process:
     default_value: az_news
   title: title
 
-# migration_dependencies:
-#   required:
-#     - uahs_default_news_tags
-#     - uahs_portal_categories
-#     - uahs_affiliation
-#     - uahs_strategic_pillars
-#     - uahs_centers
-#     - uahs_downstream_news_releases
-#     - uahs_content_promotion
+migration_dependencies:
+  required:
+    - uahs_default_news_tags
+    - uahs_portal_categories
+    - uahs_affiliation
+    - uahs_strategic_pillars
+    - uahs_centers
+    - uahs_downstream_news_releases
+    - uahs_content_promotion
 
 dependencies:
   enforced:
