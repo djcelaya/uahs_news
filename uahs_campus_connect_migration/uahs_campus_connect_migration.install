@@ -1,9 +1,0 @@
-<?php
-
-use Drupal\Core\Database;
-
-function uahs_campus_connect_migration_install() {
-    $databases = Database::$connections;
-    //$databases =
-    print_r($databases);
-}
