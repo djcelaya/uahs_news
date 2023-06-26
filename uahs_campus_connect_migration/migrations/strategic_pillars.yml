@@ -1,0 +1,22 @@
+id: uahs_strategic_pillars
+label: Strategic Pillars
+migration_group: uahs_campus_connect
+
+source:
+  plugin: strategic_pillars
+
+process:
+  vid:
+    plugin: default_value
+    default_value: az_news_tags
+  name: name
+  'description/value': description
+  'description/format': format
+
+destination:
+  plugin: entity:taxonomy_term
+
+dependencies:
+  enforced:
+    module:
+      - az_news
