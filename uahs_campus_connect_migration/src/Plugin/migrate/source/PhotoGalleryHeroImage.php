@@ -25,6 +25,7 @@ class PhotoGalleryHeroImage extends SqlBase {
         $query->condition('n.type', 'photo_gallery', '=');
         $query->condition('n.status', '1', '=');
         $query->groupBy('n.nid');
+        return $query;
     }
 
     public function fields() {
