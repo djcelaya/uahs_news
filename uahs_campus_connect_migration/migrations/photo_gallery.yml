@@ -15,6 +15,12 @@ process:
     plugin: default_value
     default_value: az_news
   title: title
+  'field_az_media_image/target_id':
+    -
+      plugin: migration_lookup
+      source: field_cover_image
+      migration:
+        - uahs_photo_gallery_cover_image
   temp_field_az_published:
     - plugin: callback
       callable: strtotime
@@ -73,6 +79,7 @@ migration_dependencies:
     - uahs_centers
     - uahs_downstream_news_releases
     - uahs_content_promotion
+    - uahs_photo_gallery_cover_image
 
 dependencies:
   enforced:
