@@ -15,7 +15,8 @@ SELECT
 	GROUP_CONCAT(DISTINCT ttd3.name) AS field_portal_category,
 	GROUP_CONCAT(DISTINCT ttd4.name) AS field_affiliation,
 	GROUP_CONCAT(DISTINCT ttd5.name) AS field_strategic_theme,
-	GROUP_CONCAT(DISTINCT ttd6.name) AS field_health_sciences_centers
+	GROUP_CONCAT(DISTINCT ttd6.name) AS field_health_sciences_centers,
+	GROUP_CONCAT(DISTINCT ttd7.name) AS field_downstream_sites
 
 FROM node AS n
 
