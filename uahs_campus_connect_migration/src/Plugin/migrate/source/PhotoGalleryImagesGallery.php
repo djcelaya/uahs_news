@@ -8,7 +8,7 @@ use Drupal\migrate\Plugin\migrate\source\SqlBase;
  * Source plugin for the photo gallery paragraph used in the AZ News content that 
  * succeeds the Photos content type in UAHS Campus Connect.
  * 
- * @MigrateSoruce(id = "photo_gallery_images_gallery")
+ * @MigrateSource(id = "photo_gallery_images_gallery")
  */
 class PhotoGalleryImagesGallery extends SqlBase {
 
@@ -37,6 +37,6 @@ class PhotoGalleryImagesGallery extends SqlBase {
                 'type' => 'integer',
                 'alias' => 'n'
             ]
-            ];
+        ];
     }
 }
