@@ -1,0 +1,30 @@
+id: uahs_photo_gallery_images_gallery
+label: Photo Gallery Images Gallery
+migration_group: uahs_campus_connect
+
+source:
+  plugin: photo_gallery_images_gallery
+
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: az_photo_gallery
+
+process:
+  field_az_photos:
+    plugin: sub_process
+    source: uris
+    process:
+      # delta: delta
+      target_id:
+        - plugin: migration_lookup
+          source: uri
+          migration:
+            - uahs_photo_gallery_images
+  gallery_display_processed:
+    plugin: default_value
+    default_value: 'grid'
+
+migration_dependencies:
+  required:
+    - uahs_photo_gallery_images
+      
