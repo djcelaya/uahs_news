@@ -1,6 +1,7 @@
 SELECT
 	n.nid AS nid,
-	GROUP_CONCAT(DISTINCT fm.uri) AS uris
+	GROUP_CONCAT(DISTINCT fm.uri) AS uris,
+	GROUP_CONCAT(fdfi.delta) AS deltas
 
 FROM node AS n
 
