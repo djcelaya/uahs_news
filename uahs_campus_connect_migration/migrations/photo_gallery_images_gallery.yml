@@ -2,6 +2,8 @@ id: uahs_photo_gallery_images_gallery
 label: Photo Gallery Images Gallery
 migration_group: uahs_campus_connect
 
+# See: https://github.com/az-digital/az_quickstart/blob/main/modules/custom/az_migration/migrations/az_paragraph_gallery.yml
+
 source:
   plugin: photo_gallery_images_gallery
 
@@ -34,6 +36,16 @@ process:
       migration:
         - uahs_photo_gallery_images
       source: '@photo_uris'
+  gallery_display_processed:
+    plugin: default_value
+    default_value: 'grid'
+  behavior_settings:
+    plugin: az_paragraphs_behavior_settings
+    paragraph_behavior_plugins:
+      az_photo_gallery_paragraph_behavior:
+        gallery_display: '@gallery_display_processed'
+        # az_display_settings:
+        #     bottom_spacing: bottom_spacing
 
 migration_dependencies:
   required:
