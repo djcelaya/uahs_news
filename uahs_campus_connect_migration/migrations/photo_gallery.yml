@@ -41,6 +41,22 @@ process:
   field_az_body/format:
     plugin: default_value
     default_value: az_standard
+  'field_az_main_content/target_id':
+    - plugin: migration_lookup
+      migration: uahs_photo_gallery_images_gallery
+      source: nid
+      no_stub: true
+    - plugin: extract
+      index:
+        - 0
+  'field_az_main_content/target_revision_id':
+    - plugin: migration_lookup
+      migration: uahs_photo_gallery_images_gallery
+      source: nid
+      no_stub: true
+    - plugin: extract
+      index:
+        - 1
   add_tags:
     plugin: concat
     source:
