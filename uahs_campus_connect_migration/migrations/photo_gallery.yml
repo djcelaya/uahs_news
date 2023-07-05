@@ -36,8 +36,6 @@ process:
       source: body
       search: 'intro-text'
       replace: 'lead'
-    # - source: body
-      # plugin: replace_img_tags
   field_az_body/format:
     plugin: default_value
     default_value: az_standard
@@ -96,6 +94,7 @@ migration_dependencies:
     - uahs_downstream_news_releases
     - uahs_content_promotion
     - uahs_photo_gallery_cover_image
+    - uahs_photo_gallery_images_gallery
 
 dependencies:
   enforced:
