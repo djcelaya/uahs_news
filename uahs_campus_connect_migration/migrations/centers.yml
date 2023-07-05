@@ -4,8 +4,6 @@ migration_group: uahs_campus_connect
 
 source:
   plugin: centers
-  key: migrate
-  target: default
 
 process:
   vid:
