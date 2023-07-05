@@ -4,7 +4,6 @@ migration_group: uahs_campus_connect
 
 source:
   plugin: affiliation
-  track changes: true
 
 process:
   vid:
