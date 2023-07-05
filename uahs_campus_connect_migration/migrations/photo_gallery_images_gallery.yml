@@ -11,31 +11,17 @@ destination:
   plugin: 'entity_reference_revisions:paragraph'
   default_bundle: az_photo_gallery
 
-# process:
-#   field_az_photos:
-#     plugin: sub_process
-#     source: uris
-#     process:
-#       # delta: delta
-#       target_id:
-#         - plugin: migration_lookup
-#           source: uri
-#           migration:
-#             - uahs_photo_gallery_images
-#   gallery_display_processed:
-#     plugin: default_value
-#     default_value: 'grid'
-
 process:
-  photo_uris:
-    - plugin: explode
-      source: uris
-      delimiter: ','
   field_az_photos:
-    - plugin: migration_lookup
-      migration:
-        - uahs_photo_gallery_images
-      source: '@photo_uris'
+    - plugin: sub_process
+      source: uris_deltas
+      process:
+        delta: delta
+        target_id:
+          - plugin: migration_lookup
+            migration:
+            - uahs_photo_gallery_images
+            source: uri
   gallery_display_processed:
     plugin: default_value
     default_value: 'grid'
@@ -50,4 +36,3 @@ process:
 migration_dependencies:
   required:
     - uahs_photo_gallery_images
-      
