@@ -57,7 +57,7 @@ class PhotoGalleryImagesGallery extends SqlBase {
                 'delta' => $delta
             ];
         }
-        print_r($uris_deltas);
+        // print_r($uris_deltas);
         $row->setSourceProperty('uris_deltas', $uris_deltas);
         return parent::prepareRow($row);
     }
