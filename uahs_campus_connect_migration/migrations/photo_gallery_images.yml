@@ -46,6 +46,7 @@ process:
     entity_type: file
     value_key: uri  # is this ambiguous - with my source field?
   'field_media_az_image/alt': alt
+  delta: delta
   field_az_caption/value: title
   field_az_caption/format:
     - plugin: default_value
