@@ -85,14 +85,14 @@ process:
         - uahs_content_promotion
       source: '@pseudo_exploded_tags'
 
-  'field_az_contacts/target_id':
-    -
-      plugin: skip_on_empty
-      method: process
-      source: field_contact
+  'field_az_main_content/target_id':
+    # -
+    #   plugin: skip_on_empty
+    #   method: process
+    #   source: field_contact
     -
       plugin: migration_lookup
-      migration: uahs_tih_news_import_contact
+      migration: uahs_tih_news_import_main_content
       source: nid
       no_stub: true
     -
@@ -100,14 +100,14 @@ process:
       index:
         - 0
 
-  'field_az_contacts/target_revision_id':
-    -
-      plugin: skip_on_empty
-      method: process
-      source: field_contact
+  'field_az_main_content/target_revision_id':
+    # -
+    #   plugin: skip_on_empty
+    #   method: process
+    #   source: field_contact
     -  
       plugin: migration_lookup
-      migration: uahs_tih_news_import_contact
+      migration: uahs_tih_news_import_main_content
       source: nid
       no_stub: true
     -
@@ -129,7 +129,7 @@ migration_dependencies:
     - uahs_content_promotion
     - uahs_tih_news_import_banner_image
     - uahs_tih_news_import_images
-    # - uahs_tih_news_import_contact
+    - uahs_tih_news_import_main_content
 
 dependencies:
   enforced:

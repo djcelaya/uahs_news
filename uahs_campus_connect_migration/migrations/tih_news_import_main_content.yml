@@ -1,0 +1,35 @@
+id: uahs_tih_news_import_main_content
+label: 'TIH News Extra Body Content'
+migration_group: uahs_campus_connect
+
+source:
+  plugin: uahs_tih_news_import_main_content
+
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: az_cards
+
+process:
+  field_az_cards/0/title:
+    plugin: default_value
+    default_value: 'Extras'
+  field_az_cards/0/body: field_extras
+  field_az_cards/0/body_format:
+    plugin: default_value
+    default_value: az_standard
+
+  field_az_cards/1/title:
+    plugin: default_value
+    default_value: 'Experts'
+  field_az_cards/1/body: field_experts
+  field_az_cards/1/body_format:
+    plugin: default_value
+    default_value: az_standard
+
+  field_az_cards/2/title:
+    plugin: default_value
+    default_value: 'Contact'
+  field_az_cards/2/body: field_contact
+  field_az_cards/2/body_format:
+    plugin: default_value
+    default_value: az_standard
