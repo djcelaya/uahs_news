@@ -12,11 +12,11 @@ destination:
 process:
   delta:
     plugin: default_value
-    default_value: 1
+    default_value: 0
   field_az_cards/title:
     plugin: default_value
     default_value: 'Extras'
   field_az_cards/body: field_extras
-  field_az_cards/format:
+  field_az_cards/body_format:
     plugin: default_value
     default_value: az_standard
