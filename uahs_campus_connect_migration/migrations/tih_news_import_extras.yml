@@ -1,0 +1,19 @@
+id: uahs_tih_news_import_extras
+label: 'TIH News Extras'
+migration_group: uahs_campus_connect
+
+source:
+  plugin: tih_news_import_extras
+
+destination:
+  plugin: 'entity_reference_revision:paragraph'
+  default_bundle: az_cards
+
+process:
+  delta:
+    plugin: default_value
+    default_value: 1
+  field_az_cards_title:
+    plugin: default_value
+    default_value: 'Extras'
+  field_az_cards_body: field_extras
