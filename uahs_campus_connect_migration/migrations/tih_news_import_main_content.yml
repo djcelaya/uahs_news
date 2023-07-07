@@ -9,6 +9,7 @@ destination:
   plugin: 'entity_reference_revisions:paragraph'
   default_bundle: az_cards
 
+# TODO: need to account for any of these being empty AND set make cards full width
 process:
   field_az_cards/0/title:
     plugin: default_value
