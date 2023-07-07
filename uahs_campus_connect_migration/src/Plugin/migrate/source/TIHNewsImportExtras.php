@@ -17,7 +17,7 @@ class TIHNewsImportExtras extends SqlBase {
         $query->addField('fdfe', 'entity_id', 'entity_id');
         $query->addField('fdfe', 'field_extras_value', 'field_extras');
         $query->addJoin('LEFT OUTER', 'field_data_field_extras', 'fdfe', 'fdfe.entity_id = n.nid');
-        $query->condition('fdfe.entity_id', 'IS NOT NULL'); /// maybe here? if there's a break?
+        $query->isNotNull('fdfe.entity_id');
         $query->condition('n.status', '1', '=');
         return $query;
     }
@@ -35,6 +35,6 @@ class TIHNewsImportExtras extends SqlBase {
                 'type' => 'integer',
                 'alias' => 'fdfe'
             ]
-            ];
+        ];
     }
 }
