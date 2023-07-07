@@ -1,0 +1,137 @@
+id: uahs_tih_news_import
+label: TIH News
+migration_group: uahs_campus_connect
+
+source:
+  plugin: tih_news_import
+  constants:
+    content_type_tag: 'Story'
+
+process:
+  type:
+    plugin: default_value
+    default_value: az_news
+  title: title
+  field_az_subheading/value:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: field_teaser
+    -
+      plugin: substr
+      length: 255
+      source: field_teaser
+  field_az_subheading/format:
+    plugin: default_value
+    default_value: plain_text
+  'field_az_media_image/target_id':
+    -
+      plugin: migration_lookup
+      source: field_card_image # changed
+      migration:
+        - uahs_tih_news_import_banner_image
+  field_az_summary: field_teaser
+  temp_field_az_published:
+    -
+      plugin: callback
+      callable: strtotime
+      source: field_post_date
+    -
+      plugin: format_date
+      from_format: 'U'
+      to_format: 'Y-m-d'
+      from_timezone: 'UTC'
+      to_timezone: 'America/Phoenix'
+  field_az_published/value: '@temp_field_az_published'
+  field_az_body/value:
+    -
+      plugin: str_replace
+      source: body
+      search: 'intro-text'
+      replace: 'lead'
+    -
+      plugin: replace_img_tags
+      # source: body
+  field_az_body/format:
+    plugin: default_value
+    default_value: az_standard
+  add_tags:
+    plugin: concat
+    source:
+      - constants/content_type_tag
+      - field_health_science_category_2
+      - field_portal_category
+      - field_affiliation
+      - field_strategic_theme
+      - field_health_sciences_centers
+      - field_downstream_sites
+      - field_promote_this_content_to
+    delimiter: ','
+  pseudo_exploded_tags:
+    -
+      plugin: explode
+      source: '@add_tags'
+      delimiter: ','
+  field_az_news_tags:
+    -
+      plugin: migration_lookup
+      migration:
+        - uahs_default_news_tags
+        - uahs_portal_categories
+        - uahs_affiliation
+        - uahs_strategic_pillars
+        - uahs_centers
+        - uahs_downstream_news_releases
+        - uahs_content_promotion
+      source: '@pseudo_exploded_tags'
+
+  'field_az_contacts/target_id':
+    -
+      plugin: skip_on_empty
+      method: process
+      source: field_contact
+    -
+      plugin: migration_lookup
+      migration: uahs_tih_news_import_contact
+      source: nid
+      no_stub: true
+    -
+      plugin: extract   # This is IMPORTANT. Migration lookup returns 2 destination IDs. The first is the new entity/node ID
+      index:
+        - 0
+
+  'field_az_contacts/target_revision_id':
+    -
+      plugin: skip_on_empty
+      method: process
+      source: field_contact
+    -  
+      plugin: migration_lookup
+      migration: uahs_tih_news_import_contact
+      source: nid
+      no_stub: true
+    -
+      plugin: extract   # The second is the revision ID which MUST be set for paragraphs. See: https://antistatique.net/en/blog/how-to-migrate-content-into-drupal-paragraphs
+      index:
+        - 1
+
+destination:
+  plugin: entity:node
+
+migration_dependencies:
+  required:
+    - uahs_default_news_tags
+    - uahs_portal_categories
+    - uahs_affiliation
+    - uahs_strategic_pillars
+    - uahs_centers
+    - uahs_downstream_news_releases
+    - uahs_content_promotion
+    - uahs_tih_news_import_banner_image
+    - uahs_tih_news_import_images
+    - uahs_tih_news_import_contact
+
+dependencies:
+  enforced:
+    module:
+      - az_news

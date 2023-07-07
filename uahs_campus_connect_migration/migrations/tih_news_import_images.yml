@@ -1,0 +1,62 @@
+id: uahs_tih_news_import_images
+label: 'TIH News Images'
+migration_group: uahs_campus_connect
+
+source:
+  plugin: tih_news_import_images
+  constants:
+    UAHS_CAMPUS_CONNECT_PUBLIC_FILES: https://healthsciences.arizona.edu/sites/default/files
+    DRUPAL_FILE_SCHEME: 'public:/'
+
+process:
+  bundle:
+    plugin: default_value
+    default_value: az_image
+  pseudo_filepath:
+    -
+      plugin: substr
+      source: uri
+      start: 9
+  pseudo_source_path:
+    -
+      plugin: concat
+      delimiter: '/'
+      source:
+        - constants/UAHS_CAMPUS_CONNECT_PUBLIC_FILES
+        - '@pseudo_filepath'
+  pseudo_destination_path:
+    -
+      plugin: concat
+      delimiter: '/'
+      source:
+        - constants/DRUPAL_FILE_SCHEME
+        - '@pseudo_filepath'
+  filename: filename
+  alt: field_image_alt
+  uri:
+    -
+      plugin: file_copy
+      source:
+        - '@pseudo_source_path'
+        - '@pseudo_destination_path'
+      file_exists: replace
+      move: false
+  'field_media_az_image/target_id':
+    plugin: entity_generate
+    source: '@uri'
+    entity_type: file
+    value_key: uri
+  'field_media_az_image/alt': field_image_alt
+  field_az_caption/value: field_image_title
+  field_az_caption/format:
+    -
+      plugin: default_value
+      default_value: plain_text
+
+destination:
+  plugin: entity:media
+
+dependencies:
+  enforced:
+    module:
+      - az_media
