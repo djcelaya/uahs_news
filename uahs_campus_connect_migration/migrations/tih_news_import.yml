@@ -129,7 +129,7 @@ migration_dependencies:
     - uahs_content_promotion
     - uahs_tih_news_import_banner_image
     - uahs_tih_news_import_images
-    - uahs_tih_news_import_contact
+    # - uahs_tih_news_import_contact
 
 dependencies:
   enforced:

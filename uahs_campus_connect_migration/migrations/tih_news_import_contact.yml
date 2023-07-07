@@ -1,0 +1,27 @@
+id: uahs_tih_news_import_contact
+label: 'TIH News Contact'
+migration_group: uahs_campus_connect
+
+source:
+  plugin: tih_news_import_contact
+
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: az_contact
+
+process:
+  field_az_email:
+    plugin: parse_contact_email
+    source: field_contact
+  field_az_phone:
+    plugin: parse_contact_phone
+    source: field_contact
+  field_az_title:
+    plugin: parse_contact_name
+    source: field_contact
+
+# dependencies:
+#   enforced:
+#     module:
+#       - az_migration
+#       - az_event
