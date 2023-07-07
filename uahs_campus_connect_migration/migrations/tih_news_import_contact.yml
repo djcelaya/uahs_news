@@ -7,21 +7,25 @@ source:
 
 destination:
   plugin: 'entity_reference_revisions:paragraph'
-  default_bundle: az_contact
+  default_bundle: az_cards
 
 process:
-  field_az_email:
-    plugin: parse_contact_email
-    source: field_contact
-  field_az_phone:
-    plugin: parse_contact_phone
-    source: field_contact
-  field_az_title:
-    plugin: parse_contact_name
-    source: field_contact
-
-# dependencies:
-#   enforced:
-#     module:
-#       - az_migration
-#       - az_event
+  delta:
+    plugin: default_value
+    default_value: 2
+  field_az_cards/title:
+    plugin: default_value
+    default_value: 'Contact'
+  field_az_cards/body: field_contact
+  field_az_cards/body_format:
+    plugin: default_value
+    default_value: az_standard
+  # field_az_email:
+  #   plugin: parse_contact_email
+  #   source: field_contact
+  # field_az_phone:
+  #   plugin: parse_contact_phone
+  #   source: field_contact
+  # field_az_title:
+  #   plugin: parse_contact_name
+  #   source: field_contact
