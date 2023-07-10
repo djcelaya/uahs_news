@@ -14,13 +14,9 @@ process:
   field_az_cards/0/body: extras_card_body
   field_az_cards/0/body_format: extras_card_body_format
 
-  field_az_cards/1/title:
-    plugin: default_value
-    default_value: 'Experts'
-  field_az_cards/1/body: field_experts
-  field_az_cards/1/body_format:
-    plugin: default_value
-    default_value: az_standard
+  field_az_cards/1/title: experts_card_title
+  field_az_cards/1/body: experts_card_body
+  field_az_cards/1/body_format: experts_card_body_format
 
   field_az_cards/2/title:
     plugin: default_value

@@ -33,7 +33,10 @@ class TIHNewsImportMainContent extends SqlBase {
             'extras_card_title' => $this->t('Extras Card Title'),
             'extras_card_body' => $this->t('Extras Card Body'),
             'extras_card_body_format' => $this->t('Extras Card Body Format'),
-            'field_experts' => $this->t('Our Experts'),
+            'field_experts' => $this->t('Experts Raw'),
+            'experts_card_title' => $this->t('Experts Card Title'),
+            'experts_card_body' => $this->t('Experts Card Body'),
+            'experts_card_body_format' => $this->t('Experts Card Body Format'),
             'field_contact' => $this->t('Contact')
         ];
     }
@@ -56,9 +59,13 @@ class TIHNewsImportMainContent extends SqlBase {
         $row->setSourceProperty('extras_card_body', $extras_card_body);
         $row->setSourceProperty('extras_card_body_format', $extras_card_body_format);
 
-        // $row->setSourceProperty('experts_card_title', 'Our Experts');
-        // $row->setSourceProperty('experts_card_body', );
-        // $row->setSourceProperty('experts_card_body_format', 'az_standard');
+        $experts = $row->getSourceProperty('field_experts');
+        $experts_card_title = $experts ? 'Our Experts' : NULL;
+        $experts_card_body = $experts ? $experts : NULL;
+        $experts_card_body_format = $experts ? 'az_standard' : NULL;
+        $row->setSourceProperty('experts_card_title', $experts_card_title);
+        $row->setSourceProperty('experts_card_body', $experts_card_body);
+        $row->setSourceProperty('experts_card_body_format', $experts_card_body_format);
 
         return parent::prepareRow($row);
     }
