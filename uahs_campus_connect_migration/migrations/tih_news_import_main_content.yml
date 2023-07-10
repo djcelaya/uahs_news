@@ -18,13 +18,9 @@ process:
   field_az_cards/1/body: experts_card_body
   field_az_cards/1/body_format: experts_card_body_format
 
-  field_az_cards/2/title:
-    plugin: default_value
-    default_value: 'Contact'
-  field_az_cards/2/body: field_contact
-  field_az_cards/2/body_format:
-    plugin: default_value
-    default_value: az_standard
+  field_az_cards/2/title: contact_card_title
+  field_az_cards/2/body: contact_card_body
+  field_az_cards/2/body_format: contact_card_body_format
 
   card_width_processed:
     plugin: default_value
