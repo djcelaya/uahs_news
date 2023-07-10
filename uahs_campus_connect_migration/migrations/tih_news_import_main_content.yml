@@ -9,16 +9,10 @@ destination:
   plugin: 'entity_reference_revisions:paragraph'
   default_bundle: az_cards
 
-# TODO: need to account for any of these being empty AND set make cards full width
-# See maybe: https://understanddrupal.com/lessons/migrating-taxonomy-terms-and-multivalue-fields-drupal/
 process:
-  field_az_cards/0/title:
-    plugin: default_value
-    default_value: 'Extras'
-  field_az_cards/0/body: field_extras
-  field_az_cards/0/body_format:
-    plugin: default_value
-    default_value: az_standard
+  field_az_cards/0/title: extras_card_title
+  field_az_cards/0/body: extras_card_body
+  field_az_cards/0/body_format: extras_card_body_format
 
   field_az_cards/1/title:
     plugin: default_value
@@ -35,6 +29,7 @@ process:
   field_az_cards/2/body_format:
     plugin: default_value
     default_value: az_standard
+
   card_width_processed:
     plugin: default_value
     default_value: 'col-12 col-md-12 col-lg-12'

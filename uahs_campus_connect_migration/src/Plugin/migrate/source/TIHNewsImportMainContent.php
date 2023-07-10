@@ -3,6 +3,7 @@
 namespace Drupal\uahs_campus_connect_migration\Plugin\migrate\source;
 
 use Drupal\migrate\Plugin\migrate\source\SqlBase;
+use Drupal\migrate\Row;
 
 /**
  * Source plugin for TIH News extras, experts, and contact fields.
@@ -28,7 +29,10 @@ class TIHNewsImportMainContent extends SqlBase {
     public function fields() {
         return [
             'nid' => $this->t('Node ID'),
-            'field_extras' => $this->t('Extras'),
+            'field_extras' => $this->t('Extras Raw'),
+            'extras_card_title' => $this->t('Extras Card Title'),
+            'extras_card_body' => $this->t('Extras Card Body'),
+            'extras_card_body_format' => $this->t('Extras Card Body Format'),
             'field_experts' => $this->t('Our Experts'),
             'field_contact' => $this->t('Contact')
         ];
@@ -41,5 +45,21 @@ class TIHNewsImportMainContent extends SqlBase {
                 'alias' => 'n'
             ]
         ];
+    }
+
+    public function prepareRow(Row $row) {
+        $extras = $row->getSourceProperty('field_extras');
+        $extras_card_title = $extras ? 'Extras' : NULL;
+        $extras_card_body = $extras ? $extras : NULL;
+        $extras_card_body_format = $extras ? 'az_standard' : NULL;
+        $row->setSourceProperty('extras_card_title', $extras_card_title);
+        $row->setSourceProperty('extras_card_body', $extras_card_body);
+        $row->setSourceProperty('extras_card_body_format', $extras_card_body_format);
+
+        // $row->setSourceProperty('experts_card_title', 'Our Experts');
+        // $row->setSourceProperty('experts_card_body', );
+        // $row->setSourceProperty('experts_card_body_format', 'az_standard');
+
+        return parent::prepareRow($row);
     }
 }
