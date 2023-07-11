@@ -4,7 +4,7 @@
  * Adjusts field_az_media_image in az_news so that it permits remote videos
  * in addition to the default image teaser.
  */
-function uahs_news_install() {
+function enable_hero_video() {
     // print('Did this even run?');
     // echo $message;
     // $message = 'Did this even run?';
@@ -26,11 +26,37 @@ function uahs_news_install() {
 /**
  * Restores az_news.field_az_media_image to its default settings – only accepting a single image.
  */
-function uahs_news_uninstall() {
+function disable_hero_video() {
     $config_factory = \Drupal::configFactory();
     $config = $config_factory->getEditable('field.field.node.az_news.field_az_media_image');
     $config->set('settings.handler_settings.target_bundles', [
         'az_image' => 'az_image'
     ]);
     $config->save(TRUE);
+}
+
+/**
+ * Adds a Very Small media display that can be used when embedding images.
+ */
+function add_very_small_image_display() {
+    return;
+}
+
+/**
+ * Removes the Very Small media display.
+ */
+function remove_very_small_image_display() {
+    return;
+}
+
+
+function uahs_news_install() {
+    enable_hero_video();
+    add_very_small_image_display();
+}
+
+
+function uahs_news_uninstall() {
+    disable_hero_video();
+    remove_very_small_image_display();
 }
