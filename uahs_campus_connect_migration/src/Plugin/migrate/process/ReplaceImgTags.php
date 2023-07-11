@@ -91,7 +91,7 @@ class ReplaceImgTags extends ProcessPluginBase {
         if (preg_match('/class="image-([\w]+)_image[^"]*"/', $match, $matches)) {
             // temporary until we can add a "az_very_small" view mode
             if ($matches[1] == "very_small") {
-                return "az_square";
+                return "uahs_very_small";
             }
             return 'az_' . $matches[1];
         }
