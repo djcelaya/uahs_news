@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: uahs_very_small
+label: 'Very Small (220px)'
+effects:
+  bdefc9b4-4f3a-451c-b621-d351ac6eff6e:
+    uuid: bdefc9b4-4f3a-451c-b621-d351ac6eff6e
+    id: image_scale
+    weight: 1
+    data:
+      width: 220
+      height: null
+      upscale: true
