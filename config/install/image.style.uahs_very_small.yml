@@ -1,6 +1,9 @@
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  enforced:
+    module:
+      - uahs_news
 name: uahs_very_small
 label: 'Very Small (220px)'
 effects:

@@ -39,14 +39,24 @@ function disable_hero_video() {
  * Adds a Very Small media display that can be used when embedding images.
  */
 function add_very_small_image_display() {
-    return;
+    $config_factory = \Drupal::configFactory();
+    $config = $config_factory->getEditable('filter.format.az_standard');
+    $adjusted_config = $config->get('filters.media_embed.settings.allowed_view_modes');
+    $adjusted_config['uahs_very_small'] = 'uahs_very_small';
+    $config->set('filters.media_embed.settings.allowed_view_modes', $adjusted_config);
+    $config->save(TRUE);
 }
 
 /**
  * Removes the Very Small media display.
  */
 function remove_very_small_image_display() {
-    return;
+    $config_factory = \Drupal::configFactory();
+    $config = $config_factory->getEditable('filter.format.az_standard');
+    $adjusted_config = $config->get('filters.media_embed.settings.allowed_view_modes');
+    unset($adjusted_config['uahs_very_small']);
+    $config->set('filters.media_embed.settings.allowed_view_modes', $adjusted_config);
+    $config->save(TRUE);
 }
 
 

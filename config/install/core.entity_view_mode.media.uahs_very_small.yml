@@ -3,6 +3,9 @@ status: true
 dependencies:
   module:
     - media
+  enforced:
+    module:
+      - uahs_news
 id: media.uahs_very_small
 label: 'Very Small (220px)'
 targetEntityType: media
