@@ -1,7 +1,7 @@
 name: 'UAHS News'
 type: module
 description: 'Customizations and overrides of AZ News for UAHS Communications.'
-core_version_requirement: ^9
+core_version_requirement: ^9 || ^10
 package: 'UAHS Communications'
 dependencies:
   # config:
