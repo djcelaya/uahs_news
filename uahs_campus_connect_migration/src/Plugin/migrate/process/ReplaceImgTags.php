@@ -63,11 +63,10 @@ class ReplaceImgTags extends ProcessPluginBase {
             $query->addField('m', 'uuid');
             $result = $query->execute();
             $record = $result->fetchAssoc();
-//            echo $filename . '-> ' . $record['uuid'] . '\n';
             if ($record['uuid']) {
                 return $record['uuid'];
             } else {
-                print('FAILURE: ' . $filename . ' -> ' . $record['uuid'] . '\n');
+                print("FAILURE: " . $filename . " -> " . $record['uuid'] . "\n");
                 return '';
             }
             return $record['uuid'] ?? '';
