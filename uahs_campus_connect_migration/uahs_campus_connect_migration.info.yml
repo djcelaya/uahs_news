@@ -2,7 +2,7 @@ type: module
 name: 'UAHS Campus Connect'
 description: 'Migrates news content from UAHS Campus Connect (D7) to Health Sciences (QS2).'
 package: 'UAHS Communications'
-core_version_requirement: ^9
+core_version_requirement: ^9 || ^10
 dependencies:
   - az_news
   - drupal:migrate
