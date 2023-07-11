@@ -4,8 +4,8 @@ dependencies: {  }
 name: uahs_very_small
 label: 'Very Small (220px)'
 effects:
-  bdefc9b4-4f3a-451c-b621-d351ac6eff6e:
-    uuid: bdefc9b4-4f3a-451c-b621-d351ac6eff6e
+  6b824ce6-af56-4807-894b-7ec0b4d910df:
+    uuid: 6b824ce6-af56-4807-894b-7ec0b4d910df
     id: image_scale
     weight: 1
     data:
