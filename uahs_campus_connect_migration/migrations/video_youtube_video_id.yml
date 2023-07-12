@@ -1,0 +1,30 @@
+id: uahs_video_youtube_video_id
+label: 'Video YouTube Video ID'
+migration_group: uahs_campus_connect
+
+source:
+  plugin: video_youtube_video_id
+  constants:
+    YOUTUBE_BASE_URL: 'https://www.youtube.com/watch?v='
+
+destination:
+  plugin: entity:media
+
+process:
+  bundle:
+    plugin: default_value
+    default_value: az_remote_video
+  'field_media_az_oembed_video/0/value':
+    - plugin: skip_on_empty
+      method: row
+      source: youtube_video_id
+      message: 'YouTube video ID is not set.'
+    - plugin: concat
+      source:
+        - constants/YOUTUBE_BASE_URL
+        - youtube_video_id
+
+dependencies:
+  enforced:
+    module:
+      - az_media
