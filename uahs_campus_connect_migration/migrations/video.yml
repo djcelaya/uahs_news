@@ -35,9 +35,10 @@ process:
       to_timezone: 'America/Phoenix'
   field_az_published/value: '@temp_field_az_published'
   field_az_body/value:
-    -
-      plugin: str_replace
+    - plugin: skip_on_empty
+      method: process
       source: body
+    - plugin: str_replace
       search: 'intro-text'
       replace: 'lead'
   field_az_body/format:
