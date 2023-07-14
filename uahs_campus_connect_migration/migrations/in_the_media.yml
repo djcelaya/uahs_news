@@ -1,0 +1,70 @@
+id: uahs_in_the_media
+label: In The Media
+migration_group: uahs_campus_connect
+
+source:
+  plugin: in_the_media
+  constants:
+    content_type_tag: 'In The Media'
+
+process:
+  type:
+    plugin: default_value
+    default_value: az_news
+  title: title
+  field_az_summary:
+    -
+      plugin: callback
+      callable: strip_tags
+      source: body
+    -
+      plugin: str_replace
+      search: '&nbsp;'
+      replace: ' '
+  field_az_body/value: body
+  field_az_body/format:
+    -
+      plugin: default_value
+      default_value: az_standard
+  temp_field_az_published:
+    -
+      plugin: callback
+      callable: strtotime
+      source: field_release_date
+    -
+      plugin: format_date
+      from_format: 'U'
+      to_format: 'Y-m-d'
+      from_timezone: 'UTC'
+      to_timezone: 'America/Phoenix'
+  field_az_published/value: '@temp_field_az_published'
+  field_az_link/title: field_link_to_story_title
+  field_az_link/uri: field_link_to_story_url
+  add_tags:
+    plugin: concat
+    source:
+      - constants/content_type_tag
+    delimiter: ','
+  pseudo_exploded_tags:
+    -
+      plugin: explode
+      source: '@add_tags'
+      delimiter: ','
+  field_az_news_tags:
+    -
+      plugin: migration_lookup
+      migration:
+        - uahs_default_news_tags
+      source: '@pseudo_exploded_tags'
+
+destination:
+  plugin: entity:node
+
+migration_dependencies:
+  required:
+    - uahs_default_news_tags
+
+dependencies:
+  enforced:
+    module:
+      - az_news
