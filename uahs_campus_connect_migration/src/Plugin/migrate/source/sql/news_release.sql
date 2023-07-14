@@ -2,12 +2,16 @@ SELECT
 	n.nid,
 	n.title,
 	fdfch.field_card_headline_value AS field_card_headline,
-	fm.uri AS field_banner_image,
 	ft.field_teaser_value AS field_teaser,
+	fm.uri AS field_banner_image,
+	fdfcic.field_cover_image_caption_value AS field_cover_image_caption,
+	fdfyvi.field_youtube_video_id_value AS field_youtube_video_id,
+	fdfv.field_video_video_url AS field_video,
 	fpd.field_post_date_value AS field_post_date,
-	b.body_value AS body,
 	fesl.field_external_story_link_url AS field_external_story_link_url,
 	fesl.field_external_story_link_title AS field_external_story_link_title,
+	b.body_value AS body,
+	
 	fe.field_experts_value AS field_experts,
 	fc.field_contact_value AS field_contact,
 	GROUP_CONCAT(DISTINCT t_hsc2.name) AS field_health_sciences_category_2,
@@ -22,14 +26,22 @@ FROM node AS n
 
 LEFT JOIN field_data_field_card_headline AS fdfch ON fdfch.entity_id = n.nid
 JOIN field_data_field_teaser AS ft ON ft.entity_id = n.nid
-JOIN field_data_field_post_date AS fpd ON fpd.entity_id = n.nid
-LEFT JOIN field_data_body AS b ON b.entity_id = n.nid
-LEFT JOIN field_data_field_external_story_link AS fesl ON fesl.entity_id = n.nid
-LEFT JOIN field_data_field_experts AS fe ON fe.entity_id = n.nid
-LEFT JOIN field_data_field_contact AS fc ON fc.entity_id = n.nid
 
 LEFT JOIN field_data_field_banner_image AS fbi ON fbi.entity_id = n.nid
 LEFT JOIN file_managed AS fm ON fm.fid = fbi.field_banner_image_fid
+
+LEFT JOIN field_data_field_cover_image_caption AS fdfcic ON fdfcic.entity_id = n.nid
+LEFT JOIN field_data_field_youtube_video_id AS fdfyvi ON fdfyvi.entity_id = n.nid
+LEFT JOIN field_data_field_video AS fdfv ON fdfv.entity_id = n.nid
+
+JOIN field_data_field_post_date AS fpd ON fpd.entity_id = n.nid
+LEFT JOIN field_data_body AS b ON b.entity_id = n.nid
+LEFT JOIN field_data_field_external_story_link AS fesl ON fesl.entity_id = n.nid
+
+LEFT JOIN field_data_field_experts AS fe ON fe.entity_id = n.nid
+LEFT JOIN field_data_field_contact AS fc ON fc.entity_id = n.nid
+
+
 
 LEFT JOIN field_data_field_health_sciences_category_2 AS fhsc2 ON fhsc2.entity_id = n.nid
 LEFT JOIN taxonomy_term_data AS t_hsc2 ON t_hsc2.tid = fhsc2.field_health_sciences_category_2_tid
