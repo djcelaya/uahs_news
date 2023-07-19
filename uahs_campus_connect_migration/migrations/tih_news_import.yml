@@ -44,14 +44,12 @@ process:
       to_timezone: 'America/Phoenix'
   field_az_published/value: '@temp_field_az_published'
   field_az_body/value:
-    -
-      plugin: str_replace
+    - plugin: str_replace
       source: body
       search: 'intro-text'
       replace: 'lead'
-    -
-      plugin: replace_img_tags
-      # source: body
+    - plugin: replace_img_tags
+    - plugin: convert_highlighted_content
   field_az_body/format:
     plugin: default_value
     default_value: az_standard
