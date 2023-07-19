@@ -49,7 +49,9 @@ process:
       search: 'intro-text'
       replace: 'lead'
     - plugin: replace_img_tags
-    - plugin: convert_highlighted_content
+    - plugin: str_replace
+      search: 'highlightedContent'
+      replace: 'callout callout-midnight'
   field_az_body/format:
     plugin: default_value
     default_value: az_standard
