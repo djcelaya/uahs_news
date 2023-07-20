@@ -27,9 +27,11 @@ process:
   'field_az_media_image/target_id':
     -
       plugin: migration_lookup
-      source: field_card_image # changed
+#      source: field_card_image
+      source: hero_media
       migration:
         - uahs_tih_news_import_banner_image
+        - uahs_tih_news_import_youtube_video_id
   field_az_summary: field_teaser
   temp_field_az_published:
     -
@@ -128,6 +130,7 @@ migration_dependencies:
     - uahs_downstream_news_releases
     - uahs_content_promotion
     - uahs_tih_news_import_banner_image
+    - uahs_tih_news_import_youtube_video_id
     - uahs_tih_news_import_images
     - uahs_tih_news_import_main_content
 
