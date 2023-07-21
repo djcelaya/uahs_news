@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: uahs_youtube_card_image
+label: 'YouTube Card Image'
+effects:
+  b556fad0-6099-46c3-a5c9-abb574f820fd:
+    uuid: b556fad0-6099-46c3-a5c9-abb574f820fd
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 568
+      height: 319
+      anchor: center-center

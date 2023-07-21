@@ -1,0 +1,53 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.az_card_image
+    - field.field.media.az_remote_video.field_media_az_image
+    - field.field.media.az_remote_video.field_media_az_oembed_video
+    - image.style.uahs_youtube_card_image
+    - media.type.az_remote_video
+  module:
+    - field_group
+    - image
+third_party_settings:
+  field_group:
+    group_16x9:
+      children: {  }
+      label: '16:9 Responsive'
+      parent_name: ''
+      region: hidden
+      weight: 2
+      format_type: html_element
+      format_settings:
+        classes: 'embed-responsive embed-responsive-16by9 az-default az-media'
+        id: ''
+        element: div
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+id: media.az_remote_video.az_card_image
+targetEntityType: media
+bundle: az_remote_video
+mode: az_card_image
+content:
+  thumbnail:
+    type: image
+    label: visually_hidden
+    settings:
+      image_link: ''
+      image_style: uahs_youtube_card_image
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  created: true
+  field_media_az_image: true
+  field_media_az_oembed_video: true
+  name: true
+  uid: true
