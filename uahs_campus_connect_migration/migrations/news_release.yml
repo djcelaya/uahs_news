@@ -28,6 +28,10 @@ process:
     -
       plugin: default_value
       default_value: az_standard
+  field_az_link/uri:
+    - plugin: skip_on_empty
+      method: process
+      source: field_external_story_link_url
   temp_field_az_published:
     -
       plugin: callback
