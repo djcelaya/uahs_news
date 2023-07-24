@@ -1,0 +1,32 @@
+id: uahs_news_release_main_content
+label: 'News Release Extra Body Content'
+migration_group: uahs_campus_connect
+
+source:
+  plugin: uahs_news_release_main_content
+
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: az_cards
+
+process:
+  field_az_cards/0/title: experts_card_title
+  field_az_cards/0/body: experts_card_body
+  field_az_cards/0/body_format: experts_card_body_format
+
+  field_az_cards/1/title: contact_card_title
+  field_az_cards/1/body: contact_card_body
+  field_az_cards/1/body_format: contact_card_body_format
+
+  field_az_cards/2/title: press_kit_card_title
+  field_az_cards/2/body: press_kit_card_body
+  field_az_cards/2/body_format: press_kit_card_body_format
+
+  card_width_processed:
+    plugin: default_value
+    default_value: 'col-12 col-md-12 col-lg-12'
+  behavior_settings:
+    plugin: az_paragraphs_behavior_settings
+    paragraph_behavior_plugins:
+      az_cards_paragraph_behavior:
+        card_width: '@card_width_processed'

@@ -75,6 +75,36 @@ process:
         - uahs_downstream_news_releases
         - uahs_content_promotion
       source: '@pseudo_exploded_tags'
+  
+  'field_az_main_content/target_id':
+    # -
+    #   plugin: skip_on_empty
+    #   method: process
+    #   source: field_contact
+    -
+      plugin: migration_lookup
+      migration: uahs_news_release_main_content
+      source: nid
+      no_stub: true
+    -
+      plugin: extract   # This is IMPORTANT. Migration lookup returns 2 destination IDs. The first is the new entity/node ID
+      index:
+        - 0
+
+  'field_az_main_content/target_revision_id':
+    # -
+    #   plugin: skip_on_empty
+    #   method: process
+    #   source: field_contact
+    -  
+      plugin: migration_lookup
+      migration: uahs_news_release_main_content
+      source: nid
+      no_stub: true
+    -
+      plugin: extract   # The second is the revision ID which MUST be set for paragraphs. See: https://antistatique.net/en/blog/how-to-migrate-content-into-drupal-paragraphs
+      index:
+        - 1
 
 destination:
   plugin: entity:node
@@ -89,6 +119,7 @@ migration_dependencies:
     - uahs_downstream_news_releases
     - uahs_content_promotion
     - uahs_news_release_banner_image
+    - uahs_news_release_main_content
 
 dependencies:
   enforced:
