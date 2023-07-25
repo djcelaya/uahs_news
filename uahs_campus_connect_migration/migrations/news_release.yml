@@ -130,6 +130,7 @@ migration_dependencies:
     - uahs_downstream_news_releases
     - uahs_content_promotion
     - uahs_news_release_banner_image
+    - uahs_news_release_images
     - uahs_news_release_main_content
 
 dependencies:
