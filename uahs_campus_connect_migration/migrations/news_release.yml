@@ -23,7 +23,18 @@ process:
       migration:
         - uahs_news_release_banner_image
   field_az_summary: field_teaser
-  field_az_body/value: body
+  field_az_body/value:
+    - plugin: skip_on_empty
+      method: process
+      source: body
+    - plugin: str_replace
+      # source: body
+      search: 'intro-text'
+      replace: 'lead'
+    - plugin: replace_img_tags
+    - plugin: str_replace
+      search: 'highlightedContent'
+      replace: 'callout callout-midnight'
   field_az_body/format:
     -
       plugin: default_value
