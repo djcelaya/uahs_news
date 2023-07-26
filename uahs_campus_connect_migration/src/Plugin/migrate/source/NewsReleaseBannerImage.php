@@ -13,16 +13,23 @@ class NewsReleaseBannerImage extends SqlBase {
 
     public function query() {
         $query = $this->select('node', 'n');
-        $query->addJoin('LEFT OUTER', 'field_data_field_banner_image', 'fbi', 'fbi.entity_id = n.nid');
-        $query->addJoin('INNER', 'file_managed', 'fm', 'fm.fid = fbi.field_banner_image_fid');
+        $query->addField('fm2', 'uri', 'uri');
+        $query->addField('fcic', 'field_cover_image_caption_value', 'field_cover_image_caption');
+
+        $query->addJoin('LEFT OUTER', 'field_data_field_card_image', 'fdfci', 'fdfci.entity_id = n.nid');
+        $query->addJoin('LEFT OUTER', 'file_managed', 'fm2', 'fm2.fid = fdfci.field_card_image_fid');
+
+
+        // $query->addJoin('LEFT OUTER', 'field_data_field_banner_image', 'fbi', 'fbi.entity_id = n.nid');
+        // $query->addJoin('INNER', 'file_managed', 'fm', 'fm.fid = fbi.field_banner_image_fid');
         $query->addJoin('LEFT OUTER', 'field_data_field_cover_image_caption', 'fcic', 'fcic.entity_id = n.nid');
         $query->condition('n.type', 'news_release', '=');
         $query->condition('n.status', '1', '=');
-        $query->condition('fm.type', 'image', '=');
-        $query->addField('fm', 'filename', 'filename');
-        $query->addField('fm', 'uri', 'uri');
-        $query->addField('fcic', 'field_cover_image_caption_value', 'field_cover_image_caption');
-        $query->groupBy('fm.fid');
+        // $query->condition('fm.type', 'image', '=');
+        // $query->addField('fm', 'filename', 'filename');
+        // $query->addField('fm', 'uri', 'uri');
+
+        // $query->groupBy('fm.fid');
         return $query;
     }
 
