@@ -15,8 +15,10 @@ class NewsRelease extends SqlBase {
     public function query() {
         $query = $this->select('node', 'n');
         $query->addJoin('INNER', 'field_data_field_teaser', 'ft', 'ft.entity_id = n.nid');
-        $query->addJoin('LEFT OUTER', 'field_data_field_banner_image', 'fbi', 'fbi.entity_id = n.nid');
-        $query->addJoin('LEFT OUTER', 'file_managed', 'fm', 'fm.fid = fbi.field_banner_image_fid');
+        //$query->addJoin('LEFT OUTER', 'field_data_field_banner_image', 'fbi', 'fbi.entity_id = n.nid');
+        $query->addJoin('LEFT OUTER', 'field_data_field_card_image', 'fbi', 'fbi.entity_id = n.nid');
+        // $query->addJoin('LEFT OUTER', 'file_managed', 'fm', 'fm.fid = fbi.field_banner_image_fid');
+        $query->addJoin('LEFT OUTER', 'file_managed', 'fm', 'fm.fid = fbi.field_card_image_fid');
         $query->addJoin('INNER', 'field_data_field_post_date', 'fpd', 'fpd.entity_id = n.nid');
         $query->addJoin('LEFT OUTER', 'field_data_body', 'b', 'b.entity_id = n.nid');
         $query->addJoin('LEFT OUTER', 'field_data_field_external_story_link', 'fesl', 'fesl.entity_id = n.nid');

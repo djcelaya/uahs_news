@@ -19,7 +19,7 @@ process:
   'field_az_media_image/target_id':
     -
       plugin: migration_lookup
-      source: field_banner_image
+      source: field_banner_image # START HERE: verify that this is the card image URI - not banner image
       migration:
         - uahs_news_release_banner_image
   field_az_summary: field_teaser
