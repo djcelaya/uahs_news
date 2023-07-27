@@ -18,11 +18,15 @@ class NewsReleaseMainContent extends SqlBase {
         $query->addField('fdfe', 'field_experts_value', 'field_experts');
         $query->addField('fdfc', 'field_contact_value', 'field_contact');
         $query->addField('fdfepkl', 'field_electronic_press_kit_link_url', 'field_electronic_press_kit_link');
+        $query->addExpression("GROUP_CONCAT(fdfrns.field_related_news_stories_title SEPARATOR '|')", 'field_related_news_stories_title');
+        $query->addExpression('GROUP_CONCAT(fdfrns.field_related_news_stories_url)', 'field_related_news_stories_url');
         $query->addJoin('LEFT OUTER', 'field_data_field_experts', 'fdfe', 'fdfe.entity_id = n.nid');
         $query->addJoin('LEFT OUTER', 'field_data_field_contact', 'fdfc', 'fdfc.entity_id = n.nid');
         $query->addJoin('LEFT OUTER', 'field_data_field_electronic_press_kit_link', 'fdfepkl', 'fdfepkl.entity_id = n.nid');
+        $query->addJoin('LEFT OUTER', 'field_data_field_related_news_stories', 'fdfrns', 'fdfrns.entity_id = n.nid');
         $query->condition('n.type', 'news_release', '=');
         $query->condition('n.status', '1', '=');
+        $query->groupBy('n.nid');
         return $query;
     }
 
@@ -32,6 +36,9 @@ class NewsReleaseMainContent extends SqlBase {
             'field_experts' => $this->t('Experts'),
             'field_contact' => $this->t('Contact'),
             'field_electronic_press_kit_link' => $this->t('Electronic Press Kit Link'),
+            'field_related_news_stories_title' => $this->t('Related Story Content Title'),
+            'field_related_news_stories_url' => $this->t('Related Story Content URL'),
+            'field_related_news_stories' => $this->t('Related Story Content')
         ];
     }
 
@@ -73,6 +80,28 @@ class NewsReleaseMainContent extends SqlBase {
         $row->setSourceProperty('press_kit_card_body', $press_kit_card_body);
         $row->setSourceProperty('press_kit_card_body_format', $press_kit_card_body_format);
 
+        $related_story_title = $row->getSourceProperty('field_related_news_stories_title');
+        $related_story_url = $row->getSourceProperty('field_related_news_stories_url');
+        if ($related_story_url) {
+            $related_story_card_title = 'Related Stories';
+            $related_story_titles = explode('|', $related_story_title);
+            $related_story_urls = explode(',', $related_story_url);
+            $related_story_card_body = '';
+            for ($i = 0; $i < count($related_story_urls); $i++) {
+                $story_title = $related_story_titles[$i];
+                $story_url = $related_story_urls[$i];
+                $related_story_card_body .= '<p><a href="' . $story_url . '">' . $story_title . '</a></p>';
+            }
+            $related_story_card_body_format = 'az_standard';
+        } else {
+            $related_story_card_title = NULL;
+            $related_story_card_body = NULL;
+            $related_story_card_body_format = NULL;
+        }
+        $row->setSourceProperty('related_stories_card_title', $related_story_card_title);
+        $row->setSourceProperty('related_stories_card_body', $related_story_card_body);
+        $row->setSourceProperty('related_stories_card_body_format', $related_story_card_body_format);
+        
         return parent::prepareRow($row);
     }
 }

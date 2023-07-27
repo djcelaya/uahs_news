@@ -22,6 +22,10 @@ process:
   field_az_cards/2/body: press_kit_card_body
   field_az_cards/2/body_format: press_kit_card_body_format
 
+  field_az_cards/3/title: related_stories_card_title
+  field_az_cards/3/body: related_stories_card_body
+  field_az_cards/3/body_format: related_stories_card_body_format
+
   card_width_processed:
     plugin: default_value
     default_value: 'col-12 col-md-12 col-lg-12'
