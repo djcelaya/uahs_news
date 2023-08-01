@@ -28,11 +28,21 @@ function enable_hero_video() {
  */
 function disable_hero_video() {
     $config_factory = \Drupal::configFactory();
+
     $config = $config_factory->getEditable('field.field.node.az_news.field_az_media_image');
     $config->set('settings.handler_settings.target_bundles', [
         'az_image' => 'az_image'
     ]);
     $config->save(TRUE);
+
+    // probably need to revist this soon....
+    $config = $config_factory->getEditable('core.entity_view_display.media.az_remote_video.az_card_image');
+    $config->delete();
+    // $config->save(TRUE);
+
+    $config = $config_factory->getEditable('image.style.uahs_youtube_card_image');
+    $config->delete();
+    // $config->save(TRUE);
 }
 
 /**
