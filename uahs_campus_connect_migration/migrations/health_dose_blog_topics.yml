@@ -1,0 +1,26 @@
+id: uahs_health_dose_blog_topics
+label: Healthy Dose Blog Topics
+migration_group: uahs_campus_connect
+
+source:
+  plugin: health_dose_blog_topics
+  constants:
+    parent_term_name: 'The Healthy Dose Blog'
+
+process:
+  vid:
+    plugin: default_value
+    default_value: az_news_tags
+  name: name
+  parent:
+      plugin: migration_lookup
+      migration: uahs_default_news_tags
+      source: constants/parent_term_name
+
+destination:
+  plugin: entity:taxonomy_term
+
+dependencies:
+  enforced:
+    module:
+      - az_news

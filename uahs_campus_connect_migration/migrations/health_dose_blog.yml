@@ -1,0 +1,92 @@
+id: uahs_health_dose_blog
+label: Healthy Dose Blog Post
+migration_group: uahs_campus_connect
+
+source:
+  plugin: health_dose_blog
+  constants:
+    content_type_tag: 'The Healthy Dose Blog'
+
+destination:
+  plugin: entity:node
+
+process:
+  type:
+    plugin: default_value
+    default_value: az_news
+  title: title
+  field_az_byline: hs_blog_author
+  field_az_subheading/value:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: field_teaser
+    -
+      plugin: substr
+      length: 255
+      source: field_teaser
+  field_az_subheading/format:
+    plugin: default_value
+    default_value: plain_text
+  'field_az_media_image/target_id':
+    -
+      plugin: migration_lookup
+      source: field_card_image
+      migration:
+        - uahs_health_dose_blog_card_image
+  field_az_summary: field_teaser
+  temp_field_az_published:
+    -
+      plugin: callback
+      callable: strtotime
+      source: post_date
+    -
+      plugin: format_date
+      from_format: 'U'
+      to_format: 'Y-m-d'
+      from_timezone: 'UTC'
+      to_timezone: 'America/Phoenix'
+  field_az_published/value: '@temp_field_az_published'
+  field_az_body/value:
+    -
+      plugin: str_replace
+      source: body
+      search: 'intro-text'
+      replace: 'lead'
+    -
+      plugin: replace_img_tags
+      # source: body
+  field_az_body/format:
+    plugin: default_value
+    default_value: az_standard
+  add_tags:
+    plugin: concat
+    source:
+      - constants/content_type_tag
+      - health_and_wellness_topics
+    delimiter: ','
+  pseudo_exploded_tags:
+    -
+      plugin: explode
+      source: '@add_tags'
+      delimiter: ','
+  field_az_news_tags:
+    -
+      plugin: migration_lookup
+      migration:
+        - uahs_default_news_tags
+        - uahs_health_dose_blog_topics
+      source: '@pseudo_exploded_tags'
+  
+
+migration_dependencies:
+  required:
+    - uahs_default_news_tags
+    - uahs_health_dose_blog_card_image
+    - uahs_health_dose_blog_images
+    - uahs_health_dose_blog_topics
+
+dependencies:
+  enforced:
+    module:
+      - az_news
