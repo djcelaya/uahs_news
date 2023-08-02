@@ -13,16 +13,28 @@ process:
   field_az_cards/0/title: first_author_card_title
   field_az_cards/0/body: first_author_card_body
   field_az_cards/0/body_format: first_author_card_body_format
+  field_az_cards/0/options:
+    plugin: default_value
+    default_value:
+      class: 'bg-gray-200'
 
   field_az_cards/1/title: second_author_card_title
   field_az_cards/1/body: second_author_card_body
   field_az_cards/1/body_format: second_author_card_body_format
+  field_az_cards/1/options:
+    plugin: default_value
+    default_value:
+      class: 'bg-gray-200'
 
   card_width_processed:
     plugin: default_value
     default_value: 'col-12 col-md-12 col-lg-12'
+  card_style_processed:
+    plugin: default_value
+    default_value: 'card card-borderless'
   behavior_settings:
     plugin: az_paragraphs_behavior_settings
     paragraph_behavior_plugins:
       az_cards_paragraph_behavior:
         card_width: '@card_width_processed'
+        card_style: '@card_style_processed'
