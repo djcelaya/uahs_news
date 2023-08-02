@@ -85,6 +85,7 @@ migration_dependencies:
     - uahs_health_dose_blog_card_image
     - uahs_health_dose_blog_images
     - uahs_health_dose_blog_topics
+    - uahs_health_dose_blog_author
 
 dependencies:
   enforced:
