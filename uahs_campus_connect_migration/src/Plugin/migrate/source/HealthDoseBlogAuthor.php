@@ -61,21 +61,23 @@ class HealthDoseBlogAuthor extends SqlBase {
         $second_author_card_body = NULL;
         $second_author_card_body_format = NULL;
 
-        if (count($author_titles) == 1) {
-            $first_author_card_title = $author_titles[0];
+        if (count($author_titles) > 0) {
+            // $first_author_card_title = $author_titles[0];
+            $first_author_card_title = 'About the Author';
             $first_author_card_body = $author_bios[0];
             $first_author_card_body_format = 'az_standard';
         }
 
-        if (count($author_titles) == 2) {
-            $second_author_card_title = $author_titles[1];
+        if (count($author_titles) > 1) {
+            // $second_author_card_title = $author_titles[1];
+            $second_author_card_title = 'About the Author';
             $second_author_card_body = $author_bios[1];
             $second_author_card_body_format = 'az_standard';
         }
 
         $row->setSourceProperty('first_author_card_title', $first_author_card_title);
         $row->setSourceProperty('first_author_card_body', $first_author_card_body);
-        $row->setSourceProperty('frist_author_card_body_format', $first_author_card_body_format);
+        $row->setSourceProperty('first_author_card_body_format', $first_author_card_body_format);
         $row->setSourceProperty('second_author_card_title', $second_author_card_title);
         $row->setSourceProperty('second_author_card_body', $second_author_card_body);
         $row->setSourceProperty('second_author_card_body_format', $second_author_card_body_format);
