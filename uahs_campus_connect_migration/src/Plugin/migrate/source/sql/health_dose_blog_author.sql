@@ -3,8 +3,8 @@ SELECT
 	fdfhba.field_hs_blog_author_target_id AS health_dose_blog_author_nid,
 	n.title AS health_dose_blog_title,
 --	fdtf.title_field_value AS title_field,
-	n2.title AS health_dose_blog_author_title,
-	fdb.body_value AS body
+	GROUP_CONCAT(n2.title SEPARATOR '|') AS health_dose_blog_author_title,
+	GROUP_CONCAT(fdb.body_value SEPARATOR '|') AS body
 	
 
 FROM node AS n
@@ -17,5 +17,6 @@ LEFT JOIN field_data_body AS fdb ON fdb.entity_id = fdfhba.field_hs_blog_author_
 WHERE
 	n.type = 'health_dose_blog'
 	AND n.status = 1
-	
+
+GROUP BY health_dose_blog_nid
 ORDER BY health_dose_blog_nid
