@@ -11,7 +11,7 @@ JOIN file_managed AS fm ON fm.fid = fbi.field_banner_image_fid
 LEFT JOIN field_data_field_cover_image_caption AS fcic ON fcic.entity_id = n.nid
 
 WHERE
-	n.type = 'news_release'
+	n.type = 'newsstory'
 	AND n.status = 1
 	AND fm.type = 'image'
 
