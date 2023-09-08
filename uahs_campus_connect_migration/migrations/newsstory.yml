@@ -1,0 +1,119 @@
+id: uahs_newsstory
+label: Stories
+migration_group: uahs_campus_connect
+source:
+  plugin: newsstory
+  track_changes: true
+  constants:
+    content_type_tag: 'Story'
+
+process:
+  type:
+    plugin: default_value
+    default_value: az_news
+  title: title
+#  field_az_byline: field_card_headline
+  # field_az_byline:
+  field_az_subheading/value:
+    -
+      plugin: substr
+      length: 255
+      source: field_teaser
+  field_az_subheading/format:
+    plugin: default_value
+    default_value: plain_text
+#  field_az_byline: field_teaser
+
+  'field_az_media_image/target_id':
+    -
+      plugin: migration_lookup
+      source: field_banner_image
+      migration:
+        - uahs_newsstory_banner_image
+
+  field_az_summary: field_teaser
+#  field_az_body/value: body
+  field_az_body/value:
+    plugin: replace_img_tags
+    source: body
+  field_az_body/format:
+    -
+      plugin: default_value
+      default_value: az_standard
+  temp_field_az_published:
+    -
+      plugin: callback
+      callable: strtotime
+      source: field_post_date
+    -
+      plugin: format_date
+      from_format: 'U'
+      to_format: 'Y-m-d'
+      from_timezone: 'UTC'
+      to_timezone: 'America/Phoenix'
+  field_az_published/value: '@temp_field_az_published'
+
+  add_story_tag:
+    plugin: concat
+    source:
+      - constants/content_type_tag
+      - field_health_science_category_2
+      - field_portal_category
+      - field_affiliation
+      - field_strategic_theme
+      - field_health_sciences_centers
+      - field_downstream_sites
+      - field_promote_this_content_to
+    delimiter: ','
+
+  pseudo_exploded_tags:
+    -
+      plugin: explode
+      source: '@add_story_tag'
+      delimiter: ','
+
+# This would hypothetically remove any duplicate entries in the exploded tags array but the callback function
+# plugin is seeing the @pseudo_exploded_tags field as a string and not an array. Duplicate entries will produce
+# two entries in the DB but the redundancy is not reflected in the UI. If the node is updated, the duplicate(s)
+# are removed. So not really a problem I think...it just seems sloppy...
+#  pseudo_unique_tags:
+#    -
+#      plugin: callback
+#      callable: array_unique
+#      source: '@pseudo_exploded_tags'
+
+  field_az_news_tags:
+    -
+      plugin: migration_lookup
+      migration:
+        - uahs_default_news_tags
+        - uahs_portal_categories
+        - uahs_affiliation
+        - uahs_strategic_pillars
+        - uahs_centers
+        - uahs_downstream_news_releases
+        - uahs_content_promotion
+      source: '@pseudo_exploded_tags'
+#      source: '@pseudo_unique_tags'
+
+
+
+destination:
+  plugin: entity:node
+
+migration_dependencies:
+  required:
+    - uahs_default_news_tags
+    - uahs_portal_categories
+    - uahs_affiliation
+    - uahs_strategic_pillars
+    - uahs_centers
+    - uahs_downstream_news_releases
+    - uahs_content_promotion
+    - uahs_newsstory_banner_image
+    - uahs_newsstory_images
+
+dependencies:
+  enforced:
+    module:
+      - az_news
