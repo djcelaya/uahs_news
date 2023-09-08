@@ -14,8 +14,9 @@ SELECT
 	GROUP_CONCAT(DISTINCT taxonomy_strategic_theme.name) AS field_strategic_theme,
 	GROUP_CONCAT(DISTINCT taxonomy_centers.name) AS field_centers,
 	GROUP_CONCAT(DISTINCT taxonomy_downstream_sites.name) AS field_downstream_sites,
-	GROUP_CONCAT(DISTINCT taxonomy_promote_this_content_to.name) AS field_promote_this_content_to
+	GROUP_CONCAT(DISTINCT taxonomy_promote_this_content_to.name) AS field_promote_this_content_to,
 --	url_alias.alias AS alias
+	fdfhc.field_highlight_content_value AS field_highlight_content
 	
 FROM node
 
@@ -49,6 +50,8 @@ LEFT JOIN field_data_field_banner_image ON field_data_field_banner_image.entity_
 LEFT JOIN file_managed ON file_managed.fid = field_data_field_banner_image.field_banner_image_fid
 
 -- JOIN url_alias ON url_alias.source = CONCAT("node/", node.nid)
+
+LEFT JOIN field_data_field_highlight_content AS fdfhc ON fdfhc.entity_id = node.nid
 
 WHERE
 	node.type = 'newsstory'
