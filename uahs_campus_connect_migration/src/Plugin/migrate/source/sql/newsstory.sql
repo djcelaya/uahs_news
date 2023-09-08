@@ -1,13 +1,12 @@
 SELECT
---	node.type AS type,
 	node.nid AS nid,
 	node.title AS title,
 --	field_data_field_card_headline.field_card_headline_value AS field_card_headline,
-	file_managed.uri AS field_banner_image,
 	field_data_field_teaser.field_teaser_value AS field_teaser,
+	file_managed.uri AS field_banner_image,
+	
 	field_data_field_post_date.field_post_date_value AS field_post_date,
 	field_data_body.body_value AS body,
---	GROUP_CONCAT(field_data_field_health_sciences_category_2.field_health_sciences_category_2_tid) AS field_health_sciences_category_2,
 	GROUP_CONCAT(DISTINCT taxonomy_health_sciences_category_2.name) AS field_health_sciences_category_2,
 	taxonomy_portal_category.name AS portal_category,
 	GROUP_CONCAT(DISTINCT taxonomy_affiliation.name) AS field_affiliation,
@@ -15,7 +14,6 @@ SELECT
 	GROUP_CONCAT(DISTINCT taxonomy_centers.name) AS field_centers,
 	GROUP_CONCAT(DISTINCT taxonomy_downstream_sites.name) AS field_downstream_sites,
 	GROUP_CONCAT(DISTINCT taxonomy_promote_this_content_to.name) AS field_promote_this_content_to,
---	url_alias.alias AS alias
 	fdfhc.field_highlight_content_value AS field_highlight_content
 	
 FROM node
@@ -49,17 +47,11 @@ LEFT JOIN taxonomy_term_data AS taxonomy_promote_this_content_to ON taxonomy_pro
 LEFT JOIN field_data_field_banner_image ON field_data_field_banner_image.entity_id = node.nid
 LEFT JOIN file_managed ON file_managed.fid = field_data_field_banner_image.field_banner_image_fid
 
--- JOIN url_alias ON url_alias.source = CONCAT("node/", node.nid)
-
 LEFT JOIN field_data_field_highlight_content AS fdfhc ON fdfhc.entity_id = node.nid
 
 WHERE
 	node.type = 'newsstory'
 	AND node.status = 1
---	AND nid = 8216
---	AND nid = 8118
---	AND nid = 315
---	AND nid = 8381
 
 GROUP BY node.nid
 
