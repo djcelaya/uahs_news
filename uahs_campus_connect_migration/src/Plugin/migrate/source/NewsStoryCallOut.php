@@ -18,7 +18,6 @@ class NewsStoryCallOut extends SqlBase {
         $query->addField('n', 'title', 'title');
         $query->addField('fdfpd', 'field_post_date_value', 'field_post_date');
         $query->addField('fdb', 'body_value', 'body');
-        $query->addExpression('GROUP_CONCAT(fm.uri)', 'field_images');
         $query->addField('fdfcns', 'field_connected_news_story_target_id', 'field_connected_news_story');
         $query->addJoin('LEFT OUTER', 'field_data_field_post_date', 'fdfpd', 'fdfpd.entity_id = n.nid');
         $query->addJoin('LEFT OUTER', 'field_data_body', 'fdb', 'fdb.entity_id = n.nid');
@@ -40,7 +39,7 @@ class NewsStoryCallOut extends SqlBase {
     public function getIds() {
         return [
             'nid' => [
-                'type' => 'intger',
+                'type' => 'integer',
                 'alias' => 'n'
             ]
         ];
