@@ -1,0 +1,24 @@
+id: uahs_newsstory_call_out
+label: "HSC News Call-out"
+migration_group: uahs_campus_connect
+
+source:
+  plugin: hsc_news_call_out
+
+destination:
+  plugin: entity:node
+
+process:
+  type:
+    plugin: default_value
+    default_value: az_news
+  title: title
+  field_az_body/value: body
+  field_az_body/format:
+    - plugin: default_value
+      default_value: az_standard
+
+dependencies:
+  enforced:
+    module:
+      - az_news
