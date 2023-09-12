@@ -13,10 +13,16 @@ process:
     plugin: default_value
     default_value: az_news
   title: title
-  field_az_body/value: body
+  field_az_body/value:
+    - plugin: replace_img_tags
+      source: body
   field_az_body/format:
     - plugin: default_value
       default_value: az_standard
+
+migration_dependencies:
+  required:
+    - uahs_newsstory_call_out_images
 
 dependencies:
   enforced:
