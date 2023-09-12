@@ -32,10 +32,16 @@ process:
         - uahs_newsstory_banner_image
 
   field_az_summary: field_teaser
-#  field_az_body/value: body
+
   field_az_body/value:
-    plugin: replace_img_tags
-    source: body
+    - plugin: str_replace
+      source: body
+      search: 'news-call-out'
+      replace: 'callout callout-blue'
+    - plugin: str_replace
+      search: 'call-out-header'
+      replace: 'h4'
+    - plugin: replace_img_tags
   field_az_body/format:
     -
       plugin: default_value
