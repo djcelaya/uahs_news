@@ -1,0 +1,20 @@
+id: uahs_honors_and_awards
+label: Honors and Awards
+migration_group: uahs_campus_connect
+
+source:
+  plugin: honors_and_awards
+
+destination:
+  plugin: entity:node
+
+process:
+  type:
+    plugin: default_value
+    default_value: az_news
+  title: title
+
+dependencies:
+  enforced:
+    module:
+      - az_news
