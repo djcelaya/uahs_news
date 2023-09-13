@@ -49,7 +49,16 @@ class HonorsAwards extends SqlBase {
     function fields() {
         return [
             'nid' => $this->t('Node ID'),
-            'title' => $this->t('Title')
+            'title' => $this->t('Title'),
+            'field_post_date' => $this->t('Post Date'),
+            'field_release_date' => $this->t('Release Date'),
+            'field_image_tease' => $this->t('Image Tease'),
+            'body' => $this->t('Body'),
+            'field_images' => $this->t('Additional Images'),
+            'field_promote_this_content_to' => $this->t('Promote this content to'),
+            'field_affiliation' => $this->t('Affiliation'),
+            'field_portal_category' => $this->t('Health Sciences Category'),
+            'field_downstream_sites' => $this->t('Destination Sites')
         ];
     }
 
