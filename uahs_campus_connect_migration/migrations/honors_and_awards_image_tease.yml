@@ -1,0 +1,57 @@
+id: uahs_honors_and_awards_image_tease
+label: 'Honors and Awards Image Tease'
+migration_group: uahs_campus_connect
+
+source:
+  plugin: honors_and_awards_image_tease
+  constants:
+    UAHS_CAMPUS_CONNECT_PUBLIC_FILES: https://healthsciences.arizona.edu/sites/default/files
+    DRUPAL_FILE_SCHEME: 'public:/'
+
+process:
+  bundle:
+    plugin: default_value
+    default_value: az_image
+  pseudo_filepath:
+    - plugin: substr
+      source: image_tease_uri
+      start: 9
+  pseudo_source_path:
+    - plugin: concat
+      delimiter: '/'
+      source:
+        - constants/UAHS_CAMPUS_CONNECT_PUBLIC_FILES
+        - '@pseudo_filepath'
+  pseudo_destination_path:
+    - plugin: concat
+      delimiter: '/'
+      source:
+        - constants/DRUPAL_FILE_SCHEME
+        - '@pseudo_filepath'
+  filename: image_tease_filename
+  alt: image_tease_alt
+  uri:
+    - plugin: file_copy
+      source:
+        - '@pseudo_source_path'
+        - '@pseudo_destination_path'
+      file_exists: replace
+      move: false
+  'field_media_az_image/target_id':
+    plugin: entity_generate
+    source: '@uri'
+    entity_type: file
+    value_key: uri
+  'field_media_az_image/alt': image_tease_alt
+  field_az_caption/value: image_tease_title
+  field_az_caption/format:
+    - plugin: default_value
+      default_value: plain_text 
+
+destination:
+  plugin: entity:media
+
+dependencies:
+  enforced:
+    module:
+      - az_media
