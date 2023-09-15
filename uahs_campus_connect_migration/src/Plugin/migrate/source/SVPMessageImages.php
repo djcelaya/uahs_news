@@ -15,8 +15,8 @@ class SVPMessageImages extends SqlBase {
         $query = $this->select('node', 'n');
         $query->addField('fm', 'filename', 'filename');
         $query->addField('fm', 'uri', 'uri');
-        $query->addField('fdfi', 'field_image_alt', 'field_image_alt');
-        $query->addField('fdfi', 'field_image_title', 'field_image_title');
+        $query->addField('fdfi', 'field_images_alt', 'field_image_alt');
+        $query->addField('fdfi', 'field_images_title', 'field_image_title');
         $query->addJoin('LEFT OUTER', 'field_data_field_images', 'fdfi', 'fdfi.entity_id = n.nid');
         $query->addJoin('LEFT OUTER', 'file_managed', 'fm', 'fm.fid = fdfi.field_images_fid');
         $query->condition('n.type', 'svp_message', '=');
