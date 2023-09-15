@@ -15,7 +15,15 @@ process:
     plugin: default_value
     default_value: az_news
   title: title
-  'field_az_media_image/target_id':
+  # 'field_az_media_image/target_id':
+  #   - plugin: migration_lookup
+  #     source: field_image_tease
+  #     migration:
+  #       - uahs_honors_and_awards_image_tease
+  field_az_featured_image_as_thumb:
+    - plugin: default_value
+      default_value: 0
+  'field_az_media_thumbnail_image/target_id':
     - plugin: migration_lookup
       source: field_image_tease
       migration:
