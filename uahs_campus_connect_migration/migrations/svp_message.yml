@@ -35,7 +35,7 @@ process:
       source: body
       search: 'intro-text'
       replace: 'lead'
-    # - plugin: replace_img_tags
+    - plugin: replace_img_tags
     - plugin: str_replace
       search: 'highlightedContent'
       replace: 'callout callout-midnight'
@@ -77,7 +77,7 @@ migration_dependencies:
   required:
     - uahs_default_news_tags
     # - uahs_svp_message_card_image
-    # - uahs_svp_message_images
+    - uahs_svp_message_images
 
 dependencies:
   enforced:
