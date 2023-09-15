@@ -10,7 +10,7 @@ use Drupal\migrate\Plugin\migrate\source\SqlBase;
  * 
  * @MigrateSource(id = "svp_message")
  */
-class HonorsAwards extends SqlBase {
+class SVPMessage extends SqlBase {
 
     function query() {
         $query = $this->select('node', 'n');
@@ -23,7 +23,7 @@ class HonorsAwards extends SqlBase {
         $query->addField('fdfrd', 'field_release_date_value', 'field_release_date');
         $query->addJoin('LEFT OUTER', 'field_data_field_card_headline', 'fdfch', 'fdfch.entity_id = n.nid');
         $query->addJoin('LEFT OUTER', 'field_data_field_card_image', 'fdfci', 'fdfci.entity_id = n.nid');
-        $query->addJoin('LEFT OUTER', 'file_managed', 'fm1', 'fm1.entity_id = fdfci.field_card_image_fid');
+        $query->addJoin('LEFT OUTER', 'file_managed', 'fm1', 'fm1.fid = fdfci.field_card_image_fid');
         $query->addJoin('LEFT OUTER', 'field_data_body', 'fdb', 'fdb.entity_id = n.nid');
         $query->addJoin('LEFT OUTER', 'field_data_field_release_date', 'fdfrd', 'fdfrd.entity_id = n.nid');
         $query->condition('n.type', 'svp_message');
