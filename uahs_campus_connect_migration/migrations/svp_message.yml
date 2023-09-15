@@ -1,0 +1,85 @@
+id: uahs_svp_message
+label: SVP Message
+migration_group: uahs_campus_connect
+
+source:
+  plugin: svp_message
+  constants:
+    content_type_tag: 'SVP Message'
+
+destination:
+  plugin: entity:node
+
+process:
+  type:
+    plugin: default_value
+    default_value: az_news
+  title: title
+  # 'field_az_media_image/target_id':
+  #   - plugin: migration_lookup
+  #     source: field_image_tease
+  #     migration:
+  #       - uahs_honors_and_awards_image_tease
+  temp_field_az_published:
+    - plugin: callback
+      callable: strtotime
+      source: field_release_date
+    - plugin: format_date
+      from_format: 'U'
+      to_format: 'Y-m-d'
+      from_timezone: 'UTC'
+      to_timezone: 'America/Phoenix'
+  field_az_published/value: '@temp_field_az_published'
+  field_az_body/value:
+    - plugin: str_replace
+      source: body
+      search: 'intro-text'
+      replace: 'lead'
+    # - plugin: replace_img_tags
+    - plugin: str_replace
+      search: 'highlightedContent'
+      replace: 'callout callout-midnight'
+    - plugin: str_replace
+      search: 'news-call-out'
+      replace: 'callout callout-blue bg-warm-gray'
+  field_az_body/format:
+    plugin: default_value
+    default_value: az_standard
+  add_tags:
+    plugin: concat
+    source:
+      - constants/content_type_tag
+      # - field_health_science_category_2
+      # - field_portal_category
+      # - field_affiliation
+      # - field_strategic_theme
+      # - field_health_sciences_centers
+      # - field_downstream_sites
+      # - field_promote_this_content_to
+    delimiter: ','
+  pseudo_exploded_tags:
+    - plugin: explode
+      source: '@add_tags'
+      delimiter: ','
+  field_az_news_tags:
+    - plugin: migration_lookup
+      migration:
+        - uahs_default_news_tags
+        # - uahs_portal_categories
+        # - uahs_affiliation
+        # - uahs_strategic_pillars
+        # - uahs_centers
+        # - uahs_downstream_news_releases
+        # - uahs_content_promotion
+      source: '@pseudo_exploded_tags'
+
+migration_dependencies:
+  required:
+    - uahs_default_news_tags
+    # - uahs_svp_message_card_image
+    # - uahs_svp_message_images
+
+dependencies:
+  enforced:
+    module:
+      - az_news
