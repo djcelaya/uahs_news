@@ -24,10 +24,16 @@ JOIN field_data_field_post_date ON field_data_field_post_date.entity_id = node.n
 JOIN field_data_body ON field_data_body.entity_id = node.nid
 
 LEFT JOIN field_data_field_health_sciences_category_2 ON field_data_field_health_sciences_category_2.entity_id = node.nid
-LEFT JOIN taxonomy_term_data AS taxonomy_health_sciences_category_2 ON taxonomy_health_sciences_category_2.tid = field_data_field_health_sciences_category_2.field_health_sciences_category_2_tid
+LEFT JOIN taxonomy_term_data AS taxonomy_health_sciences_category_2 ON (
+	taxonomy_health_sciences_category_2.tid = field_data_field_health_sciences_category_2.field_health_sciences_category_2_tid
+	AND field_data_field_health_sciences_category_2.field_health_sciences_category_2_tid != 318
+)
 
 LEFT JOIN field_data_field_portal_category ON field_data_field_portal_category.entity_id = node.nid
-LEFT JOIN taxonomy_term_data AS taxonomy_portal_category ON taxonomy_portal_category.tid = field_data_field_portal_category.field_portal_category_tid
+LEFT JOIN taxonomy_term_data AS taxonomy_portal_category ON (
+	taxonomy_portal_category.tid = field_data_field_portal_category.field_portal_category_tid
+	AND field_data_field_portal_category.field_portal_category_tid != 318
+)
 
 LEFT JOIN field_data_field_affiliation ON field_data_field_affiliation.entity_id = node.nid
 LEFT JOIN taxonomy_term_data AS taxonomy_affiliation ON taxonomy_affiliation.tid = field_data_field_affiliation.field_affiliation_tid
