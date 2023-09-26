@@ -40,10 +40,16 @@ LEFT JOIN field_data_field_promote_this_content_to AS fdfptct ON fdfptct.entity_
 LEFT JOIN taxonomy_term_data AS ttd1 ON ttd1.tid = fdfptct.field_promote_this_content_to_tid
 
 LEFT JOIN field_data_field_health_sciences_category_2 AS fdfhsc2 ON fdfhsc2.entity_id = n.nid
-LEFT JOIN taxonomy_term_data AS ttd2 ON ttd2.tid = fdfhsc2.field_health_sciences_category_2_tid
+LEFT JOIN taxonomy_term_data AS ttd2 ON (
+	ttd2.tid = fdfhsc2.field_health_sciences_category_2_tid
+	AND fdfhsc2.field_health_sciences_category_2_tid != 318
+)
 
 LEFT JOIN field_data_field_portal_category AS fdfpc ON fdfpc.entity_id = n.nid
-LEFT JOIN taxonomy_term_data AS ttd3 ON ttd3.tid = fdfpc.field_portal_category_tid
+LEFT JOIN taxonomy_term_data AS ttd3 ON (
+	ttd3.tid = fdfpc.field_portal_category_tid
+	AND fdfpc.field_portal_category_tid != 318
+)
 
 LEFT JOIN field_data_field_affiliation AS fdfa ON fdfa.entity_id = n.nid
 LEFT JOIN taxonomy_term_data AS ttd4 ON ttd4.tid = fdfa.field_affiliation_tid
