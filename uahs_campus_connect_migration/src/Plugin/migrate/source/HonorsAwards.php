@@ -37,7 +37,7 @@ class HonorsAwards extends SqlBase {
         $query->addJoin('LEFT OUTER', 'field_data_field_affiliation', 'fdfa', 'fdfa.entity_id = n.nid');
         $query->addJoin('LEFT OUTER', 'taxonomy_term_data', 'ttd2', 'ttd2.tid = fdfa.field_affiliation_tid');
         $query->addJoin('LEFT OUTER', 'field_data_field_portal_category', 'fdfpc', 'fdfpc.entity_id = n.nid');
-        $query->addJoin('LEFT OUTER', 'taxonomy_term_data', 'ttd3', 'ttd3.tid = fdfpc.field_portal_category_tid');
+        $query->addJoin('LEFT OUTER', 'taxonomy_term_data', 'ttd3', 'ttd3.tid = fdfpc.field_portal_category_tid AND fdfpc.field_portal_category_tid != 318');
         $query->addJoin('LEFT OUTER', 'field_data_field_downstream_sites', 'fdfds', 'fdfds.entity_id = n.nid');
         $query->addJoin('LEFT OUTER', 'taxonomy_term_data', 'ttd4', 'ttd4.tid = fdfds.field_downstream_sites_tid');
         $query->condition('n.type', 'honors_and_awards');

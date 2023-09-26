@@ -31,7 +31,10 @@ LEFT JOIN field_data_field_affiliation AS fdfa ON fdfa.entity_id = n.nid
 LEFT JOIN taxonomy_term_data AS ttd2 ON ttd2.tid = fdfa.field_affiliation_tid
 
 LEFT JOIN field_data_field_portal_category AS fdfpc ON fdfpc.entity_id = n.nid
-LEFT JOIN taxonomy_term_data AS ttd3 ON ttd3.tid = fdfpc.field_portal_category_tid
+LEFT JOIN taxonomy_term_data AS ttd3 ON (
+	ttd3.tid = fdfpc.field_portal_category_tid
+	AND fdfpc.field_portal_category_tid != 318
+)
 
 LEFT JOIN field_data_field_downstream_sites AS fdfds ON fdfds.entity_id = n.nid
 LEFT JOIN taxonomy_term_data AS ttd4 ON ttd4.tid = fdfds.field_downstream_sites_tid
