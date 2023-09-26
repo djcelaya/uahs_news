@@ -63,10 +63,16 @@ LEFT JOIN field_data_field_additional_boilerplates AS fdfab ON fdfab.entity_id =
 LEFT JOIN field_data_field_related_video_release AS fdfrvr ON fdfrvr.entity_id = n.nid
 
 LEFT JOIN field_data_field_health_sciences_category_2 AS fhsc2 ON fhsc2.entity_id = n.nid
-LEFT JOIN taxonomy_term_data AS t_hsc2 ON t_hsc2.tid = fhsc2.field_health_sciences_category_2_tid
+LEFT JOIN taxonomy_term_data AS t_hsc2 ON (
+	t_hsc2.tid = fhsc2.field_health_sciences_category_2_tid
+	AND fhsc2.field_health_sciences_category_2_tid != 318
+)
 
 LEFT JOIN field_data_field_portal_category AS fpc ON fpc.entity_id = n.nid
-LEFT JOIN taxonomy_term_data AS t_pc ON t_pc.tid = fpc.field_portal_category_tid
+LEFT JOIN taxonomy_term_data AS t_pc ON (
+	t_pc.tid = fpc.field_portal_category_tid
+	AND fpc.field_portal_category_tid != 318
+)
 
 LEFT JOIN field_data_field_affiliation AS fa ON fa.entity_id = n.nid
 LEFT JOIN taxonomy_term_data AS t_a ON t_a.tid = fa.field_affiliation_tid

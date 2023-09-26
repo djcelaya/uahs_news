@@ -25,9 +25,11 @@ class NewsRelease extends SqlBase {
         $query->addJoin('LEFT OUTER', 'field_data_field_experts', 'fe', 'fe.entity_id = n.nid');
         $query->addJoin('LEFT OUTER', 'field_data_field_contact', 'fc', 'fc.entity_id = n.nid');
         $query->addJoin('LEFT OUTER', 'field_data_field_health_sciences_category_2', 'fhsc2', 'fhsc2.entity_id = n.nid');
-        $query->addJoin('LEFT OUTER', 'taxonomy_term_data', 't_hsc2', 't_hsc2.tid = fhsc2.field_health_sciences_category_2_tid');
+        $query->addJoin('LEFT OUTER', 'taxonomy_term_data', 't_hsc2',
+            't_hsc2.tid = fhsc2.field_health_sciences_category_2_tid AND fhsc2.field_health_sciences_category_2_tid != 318');
         $query->addJoin('LEFT OUTER', 'field_data_field_portal_category', 'fpc', 'fpc.entity_id = n.nid');
-        $query->addJoin('LEFT OUTER', 'taxonomy_term_data', 't_pc', 't_pc.tid = fpc.field_portal_category_tid');
+        $query->addJoin('LEFT OUTER', 'taxonomy_term_data', 't_pc',
+            't_pc.tid = fpc.field_portal_category_tid AND fpc.field_portal_category_tid != 318');
         $query->addJoin('LEFT OUTER', 'field_data_field_affiliation', 'fa', 'fa.entity_id = n.nid');
         $query->addJoin('LEFT OUTER', 'taxonomy_term_data', 't_a', 't_a.tid = fa.field_affiliation_tid');
         $query->addJoin('LEFT OUTER', 'field_data_field_strategic_theme', 'fst', 'fst.entity_id = n.nid');
