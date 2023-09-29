@@ -3,6 +3,7 @@
 namespace Drupal\uahs_campus_connect_migration\Plugin\migrate\source;
 
 use Drupal\migrate\Plugin\migrate\source\SqlBase;
+use Drupal\migrate\Row;
 
 /**
  * Source plugin for (HSC) Stories.
@@ -14,10 +15,10 @@ class NewsStory extends SqlBase {
 
     public function query() {
         $query = $this->select('node', 'n');
-//        $query->addJoin('INNER', 'field_data_field_card_headline', 'fch', 'fch.entity_id = n.nid');
         $query->addJoin('INNER', 'field_data_field_teaser', 'ft', 'ft.entity_id = n.nid');
         $query->addJoin('LEFT OUTER', 'field_data_field_banner_image', 'fbi', 'fbi.entity_id = n.nid');
         $query->addJoin('LEFT OUTER', 'file_managed', 'fm', 'fm.fid = fbi.field_banner_image_fid');
+        $query->addJoin('LEFT OUTER', 'field_data_field_youtube_video_id', 'fdfyvi', 'fdfyvi.entity_id = n.nid');
         $query->addJoin('INNER', 'field_data_field_post_date', 'fpd', 'fpd.entity_id = n.nid');
         $query->addJoin('INNER', 'field_data_body', 'fdb', 'fdb.entity_id = n.nid');
         $query->addJoin('LEFT OUTER', 'field_data_field_health_sciences_category_2', 'fhsc2', 'fhsc2.entity_id = n.nid');
@@ -36,14 +37,13 @@ class NewsStory extends SqlBase {
         $query->addJoin('LEFT OUTER', 'taxonomy_term_data', 't_ds', 't_ds.tid = fds.field_downstream_sites_tid');
         $query->addJoin('LEFT OUTER', 'field_data_field_promote_this_content_to', 'fptct', 'fptct.entity_id = n.nid');
         $query->addJoin('LEFT OUTER', 'taxonomy_term_data', 't_ptct', 't_ptct.tid = fptct.field_promote_this_content_to_tid');
-        //$query->addJoin('INNER', 'url_alias', 'u_a', "u_a.source = CONCAT('node/', n.nid)");
         $query->condition('n.type', 'newsstory', '=');
         $query->condition('n.status', '1', '=');
         $query->addField('n', 'nid', 'nid');
         $query->addField('n', 'title', 'title');
-//        $query->addField('fch', 'field_card_headline_value', 'field_card_headline');
         $query->addField('ft', 'field_teaser_value', 'field_teaser');
         $query->addField('fm', 'uri', 'field_banner_image');
+        $query->addField('fdfyvi', 'field_youtube_video_id_value', 'field_youtube_video_id');
         $query->addField('fpd', 'field_post_date_value', 'field_post_date');
         $query->addField('fdb', 'body_value', 'body');
         $query->addExpression('GROUP_CONCAT(DISTINCT t_hsc2.name)', 'field_health_science_category_2');
@@ -65,7 +65,8 @@ class NewsStory extends SqlBase {
             'title' => $this->t('Headline'),
 //            'field_card_headline' => $this->t('Card Headline'),
             'field_teaser' => $this->t('Teaser'),
-            'field_banner_image' => $this->t('Hero Image'),
+            // 'field_banner_image' => $this->t('Hero Image'),
+            'hero_media' => $this->t('Hero Media'),
             'field_post_date' => $this->t('Release Date'),
             'body' => $this->t('Body'),
             'field_health_science_category_2' => $this->t('Content Category'),
@@ -87,5 +88,15 @@ class NewsStory extends SqlBase {
                 'alias' => 'n',
             ],
         ];
+    }
+
+    public function prepareRow(Row $row) {
+        $nid = $row->getSourceProperty('nid');
+        $hero_image = $row->getSourceProperty('field_banner_image');
+        $hero_video = $row->getSourceProperty('field_youtube_video_id');
+        $hero_media = $hero_video ? $hero_video : $hero_image;
+        print("Found $hero_media for NID $nid\n");
+        $row->setSourceProperty('hero_media', $hero_media);
+        return parent::prepareRow($row);
     }
 }

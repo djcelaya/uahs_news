@@ -25,11 +25,11 @@ process:
 #  field_az_byline: field_teaser
 
   'field_az_media_image/target_id':
-    -
-      plugin: migration_lookup
-      source: field_banner_image
+    - plugin: migration_lookup
+      source: hero_media
       migration:
         - uahs_newsstory_banner_image
+        - uahs_newsstory_youtube_video_id
 
   field_az_summary: field_teaser
 
@@ -117,6 +117,7 @@ migration_dependencies:
     - uahs_downstream_news_releases
     - uahs_content_promotion
     - uahs_newsstory_banner_image
+    - uahs_newsstory_youtube_video_id
     - uahs_newsstory_images
 
 dependencies:
