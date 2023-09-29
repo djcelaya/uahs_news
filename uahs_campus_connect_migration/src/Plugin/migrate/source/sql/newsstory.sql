@@ -4,7 +4,7 @@ SELECT
 --	field_data_field_card_headline.field_card_headline_value AS field_card_headline,
 	field_data_field_teaser.field_teaser_value AS field_teaser,
 	file_managed.uri AS field_banner_image,
-	
+	fdfyvi.field_youtube_video_id_value AS field_youtube_video_id,
 	field_data_field_post_date.field_post_date_value AS field_post_date,
 	field_data_body.body_value AS body,
 	GROUP_CONCAT(DISTINCT taxonomy_health_sciences_category_2.name) AS field_health_sciences_category_2,
@@ -21,6 +21,7 @@ FROM node
 -- JOIN field_data_field_card_headline ON field_data_field_card_headline.entity_id = node.nid
 JOIN field_data_field_teaser ON field_data_field_teaser.entity_id = node.nid
 JOIN field_data_field_post_date ON field_data_field_post_date.entity_id = node.nid
+LEFT JOIN field_data_field_youtube_video_id AS fdfyvi ON fdfyvi.entity_id = node.nid
 JOIN field_data_body ON field_data_body.entity_id = node.nid
 
 LEFT JOIN field_data_field_health_sciences_category_2 ON field_data_field_health_sciences_category_2.entity_id = node.nid
