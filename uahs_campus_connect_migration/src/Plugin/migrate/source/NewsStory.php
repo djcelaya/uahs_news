@@ -95,7 +95,7 @@ class NewsStory extends SqlBase {
         $hero_image = $row->getSourceProperty('field_banner_image');
         $hero_video = $row->getSourceProperty('field_youtube_video_id');
         $hero_media = $hero_video ? $hero_video : $hero_image;
-        print("Found $hero_media for NID $nid\n");
+        // print("Found $hero_media for NID $nid\n");
         $row->setSourceProperty('hero_media', $hero_media);
         return parent::prepareRow($row);
     }
