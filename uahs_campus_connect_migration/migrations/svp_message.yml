@@ -49,13 +49,6 @@ process:
     plugin: concat
     source:
       - constants/content_type_tag
-      # - field_health_science_category_2
-      # - field_portal_category
-      # - field_affiliation
-      # - field_strategic_theme
-      # - field_health_sciences_centers
-      # - field_downstream_sites
-      # - field_promote_this_content_to
     delimiter: ','
   pseudo_exploded_tags:
     - plugin: explode
@@ -65,18 +58,11 @@ process:
     - plugin: migration_lookup
       migration:
         - uahs_default_news_tags
-        # - uahs_portal_categories
-        # - uahs_affiliation
-        # - uahs_strategic_pillars
-        # - uahs_centers
-        # - uahs_downstream_news_releases
-        # - uahs_content_promotion
       source: '@pseudo_exploded_tags'
 
 migration_dependencies:
   required:
     - uahs_default_news_tags
-    # - uahs_svp_message_card_image
     - uahs_svp_message_images
 
 dependencies:
