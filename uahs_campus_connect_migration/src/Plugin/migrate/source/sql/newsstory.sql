@@ -5,6 +5,7 @@ SELECT
 	field_data_field_teaser.field_teaser_value AS field_teaser,
 	file_managed.uri AS field_banner_image,
 	fdfyvi.field_youtube_video_id_value AS field_youtube_video_id,
+	fdfv.field_video_video_url AS vimeo_video_url,
 	field_data_field_post_date.field_post_date_value AS field_post_date,
 	field_data_body.body_value AS body,
 	GROUP_CONCAT(DISTINCT taxonomy_health_sciences_category_2.name) AS field_health_sciences_category_2,
@@ -22,6 +23,7 @@ FROM node
 JOIN field_data_field_teaser ON field_data_field_teaser.entity_id = node.nid
 JOIN field_data_field_post_date ON field_data_field_post_date.entity_id = node.nid
 LEFT JOIN field_data_field_youtube_video_id AS fdfyvi ON fdfyvi.entity_id = node.nid
+LEFT JOIN field_data_field_video AS fdfv ON fdfv.entity_id = node.nid
 JOIN field_data_body ON field_data_body.entity_id = node.nid
 
 LEFT JOIN field_data_field_health_sciences_category_2 ON field_data_field_health_sciences_category_2.entity_id = node.nid
@@ -59,6 +61,7 @@ LEFT JOIN field_data_field_highlight_content AS fdfhc ON fdfhc.entity_id = node.
 WHERE
 	node.type = 'newsstory'
 	AND node.status = 1
+--	AND fdfyvi.field_youtube_video_id_value IS NOT NULL
 
 GROUP BY node.nid
 
