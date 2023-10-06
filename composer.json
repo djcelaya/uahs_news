@@ -1,8 +1,8 @@
 {
   "name": "djcelaya/uahs_news",
-  "description": "Composer project template for custom Quickstart module.",
+  "description": "Customizations and overrides of AZ News for UAHS Communications",
   "type": "drupal-module",
   "require": {
-      "drupal/core": "^9 || ^10"
+      "drupal/core": "^10"
   }
 }
