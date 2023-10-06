@@ -5,7 +5,7 @@ migration_group: uahs_campus_connect
 source:
   plugin: tih_news_import
   constants:
-    content_type_tag: 'Story'
+    content_type_tag: 'Story,Newsroom'
 
 process:
   type:
@@ -67,7 +67,7 @@ process:
       - field_strategic_theme
       - field_health_sciences_centers
       - field_downstream_sites
-      - field_promote_this_content_to
+      # - field_promote_this_content_to
     delimiter: ','
   pseudo_exploded_tags:
     -
