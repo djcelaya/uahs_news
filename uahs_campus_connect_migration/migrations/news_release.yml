@@ -19,7 +19,7 @@ process:
   'field_az_media_image/target_id':
     -
       plugin: migration_lookup
-      source: field_banner_image # START HERE: verify that this is the card image URI - not banner image
+      source: field_banner_image
       migration:
         - uahs_news_release_banner_image
   field_az_summary: field_teaser
@@ -28,7 +28,6 @@ process:
       method: process
       source: body
     - plugin: str_replace
-      # source: body
       search: 'intro-text'
       replace: 'lead'
     - plugin: replace_img_tags
@@ -64,10 +63,7 @@ process:
       - field_affiliation
       - field_strategic_theme
       - field_health_sciences_centers
-        # plugin: rewrite_centers
-        # source: field_health_sciences_centers
       - field_downstream_sites
-      - field_promote_this_content_to
     delimiter: ','
   pseudo_exploded_tags:
     -
@@ -84,7 +80,6 @@ process:
         - uahs_strategic_pillars
         - uahs_centers
         - uahs_downstream_news_releases
-        - uahs_content_promotion
       source: '@pseudo_exploded_tags'
   
   'field_az_main_content/target_id':
@@ -128,7 +123,6 @@ migration_dependencies:
     - uahs_strategic_pillars
     - uahs_centers
     - uahs_downstream_news_releases
-    - uahs_content_promotion
     - uahs_news_release_banner_image
     - uahs_news_release_images
     - uahs_news_release_main_content

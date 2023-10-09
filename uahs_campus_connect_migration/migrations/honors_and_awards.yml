@@ -15,11 +15,6 @@ process:
     plugin: default_value
     default_value: az_news
   title: title
-  # 'field_az_media_image/target_id':
-  #   - plugin: migration_lookup
-  #     source: field_image_tease
-  #     migration:
-  #       - uahs_honors_and_awards_image_tease
   field_az_featured_image_as_thumb:
     - plugin: default_value
       default_value: 0
@@ -63,7 +58,6 @@ process:
       - field_strategic_theme
       - field_health_sciences_centers
       - field_downstream_sites
-      # - field_promote_this_content_to
     delimiter: ','
   pseudo_exploded_tags:
     - plugin: explode
@@ -78,13 +72,11 @@ process:
         - uahs_strategic_pillars
         - uahs_centers
         - uahs_downstream_news_releases
-        - uahs_content_promotion
       source: '@pseudo_exploded_tags'
 
 migration_dependencies:
   required:
     - uahs_default_news_tags
-    - uahs_content_promotion
     - uahs_affiliation
     - uahs_portal_categories
     - uahs_downstream_news_releases
