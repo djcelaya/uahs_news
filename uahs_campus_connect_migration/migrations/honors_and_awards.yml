@@ -63,7 +63,7 @@ process:
       - field_strategic_theme
       - field_health_sciences_centers
       - field_downstream_sites
-      - field_promote_this_content_to
+      # - field_promote_this_content_to
     delimiter: ','
   pseudo_exploded_tags:
     - plugin: explode
