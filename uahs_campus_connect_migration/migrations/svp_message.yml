@@ -15,11 +15,6 @@ process:
     plugin: default_value
     default_value: az_news
   title: title
-  # 'field_az_media_image/target_id':
-  #   - plugin: migration_lookup
-  #     source: field_image_tease
-  #     migration:
-  #       - uahs_honors_and_awards_image_tease
   temp_field_az_published:
     - plugin: callback
       callable: strtotime
