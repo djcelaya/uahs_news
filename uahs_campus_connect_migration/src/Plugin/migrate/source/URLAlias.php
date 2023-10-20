@@ -12,8 +12,15 @@ use Drupal\migrate\Plugin\migrate\source\SqlBase;
 class URLAlias extends SqlBase {
 
     const TYPES = [
+        'in_the_media',
+        'hsc_news_call_out',
+        'health_dose_blog',
+        'honors_and_awards',
+        'news_release',
+        'photo_gallery',
+        'svp_message',
         'newsstory',
-        'hsc_news_call_out'
+        'tih_news_import'
     ];
 
     public function query() {
@@ -22,10 +29,7 @@ class URLAlias extends SqlBase {
         $query->addField('u_a', 'source');
         $query->addField('u_a', 'alias');
         $query->addField('n', 'nid');
-//        $query->addField('r', 'redirect');
         $query->addJoin('LEFT OUTER', 'url_alias', 'u_a', "u_a.source = CONCAT('node/', n.nid)");
-//        $query->addJoin('LEFT OUTER', 'redirect', 'r', "r.redirect = CONCAT('node/', n.nid)");
-        // $query->condition('n.type', 'newsstory', '=');
         $query->condition('n.type', self::TYPES, 'IN');
         $query->condition('n.status', '1', '=');
         return $query;
@@ -36,7 +40,6 @@ class URLAlias extends SqlBase {
             'pid' => $this->t('PID'),
             'source' => $this->t('Source'),
             'alias' => $this->t('URL alias'),
-//            'redirect' => $this->t('URL redirects'),
             'nid' => $this->t('Node ID'),
         );
         return $fields;

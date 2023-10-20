@@ -22,12 +22,19 @@ process:
       plugin: default_value
       default_value: 1
   redirect_source/path: alias
-#  redirect_source/query:
   link_path_processed:
     plugin: az_migrated_path_lookup # this has been shamelessly copied from az_migration
     node_migration:
-      - uahs_newsstory
+      - uahs_in_the_media
       - uahs_newsstory_call_out
+      - uahs_health_dose_blog
+      - uahs_honors_and_awards
+      - uahs_news_release
+      - uahs_photo_gallery
+      - uahs_svp_message
+      - uahs_newsstory
+      - uahs_tih_news_import
+
     source: source
   redirect_redirect/uri:
     -
@@ -48,5 +55,12 @@ destination:
 
 migration_dependencies:
   required:
-    - uahs_newsstory
+    - uahs_in_the_media
     - uahs_newsstory_call_out
+    - uahs_health_dose_blog
+    - uahs_honors_and_awards
+    - uahs_news_release
+    - uahs_photo_gallery
+    - uahs_svp_message
+    - uahs_newsstory
+    - uahs_tih_news_import
