@@ -5,7 +5,7 @@ migration_group: uahs_campus_connect
 source:
   plugin: photo_gallery_images
   constants:
-    UAHS_CAMPUS_CONNECT_PUBLIC_FILES: https://healthsciences.arizona.edu/sites/default/files
+    UAHS_CAMPUS_CONNECT_PUBLIC_FILES: https://dev-uahs-campus-connect.pantheonsite.io/sites/default/files
     DRUPAL_FILE_SCHEME: 'public:/'
 
 destination:
