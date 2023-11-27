@@ -15,7 +15,9 @@ process:
     plugin: default_value
     default_value: az_news
   title: title
-  moderation_state: 'published'
+  moderation_state:
+    plugin: default_value
+    default_value: 'published'
   'field_az_media_image/target_id':
     - plugin: migration_lookup
       source: field_cover_image
