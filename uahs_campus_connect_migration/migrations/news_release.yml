@@ -11,6 +11,9 @@ process:
     plugin: default_value
     default_value: az_news
   title: title
+  moderation_state:
+    plugin: default_value
+    default_value: 'published'
   field_az_subheading:
     -
       plugin: substr
