@@ -6,7 +6,7 @@ source:
   plugin: newsstory
   track_changes: true
   constants:
-    content_type_tag: 'Internal Story'
+    content_type_tag: 'Health Sciences Connect'
 
 process:
   type:
