@@ -6,13 +6,16 @@ source:
   plugin: newsstory
   track_changes: true
   constants:
-    content_type_tag: 'Story,Health Sciences Connect'
+    content_type_tag: 'Internal Story'
 
 process:
   type:
     plugin: default_value
     default_value: az_news
   title: title
+  moderation_state:
+    plugin: default_value
+    default_value: 'published'
   field_az_subheading/value:
     - plugin: substr
       length: 255
