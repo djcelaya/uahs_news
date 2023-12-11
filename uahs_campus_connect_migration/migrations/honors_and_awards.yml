@@ -15,6 +15,9 @@ process:
     plugin: default_value
     default_value: az_news
   title: title
+  moderation_state:
+    plugin: default_value
+    default_value: 'published'
   field_az_featured_image_as_thumb:
     - plugin: default_value
       default_value: 0
