@@ -5,13 +5,16 @@ migration_group: uahs_campus_connect
 source:
   plugin: tih_news_import
   constants:
-    content_type_tag: 'Story,Newsroom'
+    content_type_tag: 'Newsroom'
 
 process:
   type:
     plugin: default_value
     default_value: az_news
   title: title
+  moderation_state:
+    plugin: default_value
+    default_value: 'published'
   field_az_subheading/value:
     -
       plugin: skip_on_empty
